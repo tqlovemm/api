@@ -38,13 +38,16 @@ return [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule', 
-                    'controller' => 'v1/country',
+                    'controller' => [
+                      'v1/user','v1/thread'
+                    ],
                     'tokens' => [
                         '{id}' => '<id:\\w+>'
                     ]
                     
                 ]
-            ],        
+            ],
+
         ]
     ],
     'params' => $params,
