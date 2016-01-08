@@ -63,10 +63,13 @@ class ThreadController extends ActiveController
             }
             $savePath = $pathStr.'/'.time().rand(1,10000).'.jpg';
             file_put_contents($savePath,base64_decode($images[$i]));
-            array_push($Mpath,'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER["SERVER_PORT"].'/'.$savePath);
+            $abs_path = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER["SERVER_PORT"].'/'.$savePath;
+            $model->content = $model->content.'<img src="'.$abs_path.'"/>';
+            array_push($Mpath,$abs_path);
 
         }
         $model->image_path = json_encode($Mpath);
+
 
         if (!$model->save()) {
             return array_values($model->getFirstErrors())[0];
