@@ -3,16 +3,16 @@
 namespace api\modules\v2\controllers;
 
 use Yii;
+use yii\filters\auth\CompositeAuth;
+use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
-use yii\filters\auth\CompositeAuth;
-use yii\filters\auth\QueryParamAuth;
 use yii\helpers\Response;
 
-class UserController extends ActiveController
+class PostController extends ActiveController
 {
-    public $modelClass = 'api\modules\v2\models\User';
+    public $modelClass = 'api\modules\v2\models\Post';
     public $serializer = [
         'class' => 'yii\rest\Serializer',
         'collectionEnvelope' => 'items',
@@ -22,7 +22,7 @@ class UserController extends ActiveController
     {
         $behaviors = parent::behaviors();
         // token 验证  请按需开启
-         /*$behaviors['authenticator'] = [
+      /*   $behaviors['authenticator'] = [
              'class' => CompositeAuth::className(),
              'authMethods' => [
                  QueryParamAuth::className(),
@@ -50,39 +50,40 @@ class UserController extends ActiveController
 
     public function actionCreate()
     {
-       /* $model = new $this->modelClass();
+        $model = new $this->modelClass();
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
-        $model->email = base64_encode($model->email);
         if (!$model->save()) {
             return array_values($model->getFirstErrors())[0];
         }
 
-        return $model;*/
-        Response::show(401,'不允许的操作');
-
+        Response::show('202','保存成功');
     }
 
     public function actionUpdate($id)
     {
-   /*    $model = $this->findModel($id);
+        $model = $this->findModel($id);
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+
         if (!$model->save()) {
             return array_values($model->getFirstErrors())[0];
         }
-        return $model;*/
 
-        Response::show(401,'不允许的操作');
+        Response::show(202,'更新成功');
     }
 
     public function actionDelete($id)
     {
-        /*return $this->findModel($id)->delete();*/
-        Response::show(401,'不允许的操作');
+        if($this->findModel($id)->delete()){
+
+            Response::show('202','删除成功');
+
+        }
     }
 
     public function actionView($id)
     {
         return $this->findModel($id);
+
     }
 
     protected function findModel($id)

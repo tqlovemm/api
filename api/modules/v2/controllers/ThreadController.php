@@ -3,6 +3,8 @@
 namespace api\modules\v2\controllers;
 
 use Yii;
+use yii\filters\auth\CompositeAuth;
+use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
@@ -20,12 +22,12 @@ class ThreadController extends ActiveController
     {
         $behaviors = parent::behaviors();
         // token 验证  请按需开启
-        // $behaviors['authenticator'] = [
-        //     'class' => CompositeAuth::className(),
-        //     'authMethods' => [
-        //         QueryParamAuth::className(),
-        //     ],
-        // ];
+        /* $behaviors['authenticator'] = [
+             'class' => CompositeAuth::className(),
+             'authMethods' => [
+                 QueryParamAuth::className(),
+             ],
+         ];*/
         return $behaviors;
     }
 
@@ -82,13 +84,14 @@ class ThreadController extends ActiveController
 
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        /*$model = $this->findModel($id);
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
 
         if (!$model->save()) {
             return array_values($model->getFirstErrors())[0];
         }
-        return $model;
+        return $model;*/
+        Response::show(401,'不允许的操作');
     }
 
     public function actionDelete($id)
