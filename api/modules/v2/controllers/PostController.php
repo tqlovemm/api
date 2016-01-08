@@ -82,14 +82,28 @@ class PostController extends ActiveController
 
     public function actionView($id)
     {
-        return $this->findModel($id);
+        return $this->findModels($id);
 
     }
 
     protected function findModel($id)
     {
         $modelClass = $this->modelClass;
-        if (($model = $modelClass::findOne($id)) !== null) {
+
+
+            if (($model = $modelClass::findOne($id)) !== null) {
+                return $model;
+            } else {
+                throw new NotFoundHttpException('The requested page does not exist.');
+            }
+
+
+    }
+    protected function findModels($thread_id){
+
+        $modelClass = $this->modelClass;
+
+        if (($model = $modelClass::find()->where(['thread_id'=>$thread_id])->orderBy('created_at DESC')->all()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
