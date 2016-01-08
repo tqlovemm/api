@@ -48,6 +48,15 @@ class PostController extends ActiveController
         ]);
     }
 
+    public function actionView($id)
+    {
+        $query = $this->findModels($id);
+        return new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+
+    }
     public function actionCreate()
     {
         $model = new $this->modelClass();
@@ -80,11 +89,7 @@ class PostController extends ActiveController
         }
     }
 
-    public function actionView($id)
-    {
-        return $this->findModels($id);
 
-    }
 
     protected function findModel($id)
     {
@@ -102,7 +107,7 @@ class PostController extends ActiveController
 
         $modelClass = $this->modelClass;
 
-        if (($model = $modelClass::find()->where('thread_id=:thread_id',['thread_id'=>$thread_id])->orderBy('created_at DESC')->all()) !== null) {
+        if (($model = $modelClass::find()->where('thread_id=:thread_id',['thread_id'=>$thread_id])->orderBy('created_at DESC')) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

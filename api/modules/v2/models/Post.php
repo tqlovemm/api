@@ -47,6 +47,17 @@ class Post extends ActiveRecord
 
         return $fields;
     }
+    public function getUser()
+    {
+        return User::find();
+    }
+
+    public function extraFields()
+    {
+        return [
+            'user' => 'user',
+        ];
+    }
 
     /**
      * @inheritdoc
