@@ -28,6 +28,10 @@ class Post extends ActiveRecord
     {
         return $this->id;
     }
+    public function getUid()
+    {
+        return $this->user_id;
+    }
 
     public function rules()
     {
@@ -49,7 +53,7 @@ class Post extends ActiveRecord
     }
     public function getUser()
     {
-        return User::find();
+        return User::find()->where('id=:uid',[':uid'=>$this->getUid()])->all();
     }
 
     public function extraFields()
