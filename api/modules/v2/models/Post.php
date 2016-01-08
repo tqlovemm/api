@@ -53,7 +53,7 @@ class Post extends ActiveRecord
     }
     public function getUser()
     {
-        return User::find()->where('id=:uid',[':uid'=>$this->getUid()])->all();
+        return User::find()->where('id=:uid',[':uid'=>$this->uid])->orderBy('created_at DESC');
     }
 
     public function extraFields()
