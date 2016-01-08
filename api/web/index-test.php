@@ -15,3 +15,5 @@ require(__DIR__ . '/../../common/config/aliases.php');
 $config = require(__DIR__ . '/../tests/acceptance/_config.php');
 
 (new yii\web\Application($config))->run();
+
+

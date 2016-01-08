@@ -1,12 +1,10 @@
 <?php
-
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
     require(__DIR__ . '/../../common/config/params-local.php'),
     require(__DIR__ . '/params.php'),
     require(__DIR__ . '/params-local.php')
 );
-
 return [
     'id' => 'app-api',
     'basePath' => dirname(__DIR__),    
@@ -15,7 +13,11 @@ return [
         'v1' => [
             'basePath' => '@app/modules/v1',
             'class' => 'api\modules\v1\Module'
-        ]
+        ] ,
+        'v2' => [
+            'basePath' => '@app/modules/v2',
+            'class' => 'api\modules\v2\Module'
+        ],
     ],
     'components' => [        
         'user' => [
@@ -39,15 +41,13 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule', 
                     'controller' => [
-                      'v1/user','v1/thread'
+                      'v1/thread','v1/user','v2/thread',
                     ],
                     'tokens' => [
                         '{id}' => '<id:\\w+>'
                     ]
-                    
                 ]
             ],
-
         ]
     ],
     'params' => $params,

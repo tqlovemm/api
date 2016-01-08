@@ -12,11 +12,10 @@ use yii\rest\ActiveController;
 class ThreadController extends ActiveController
 {
     public $modelClass = 'api\modules\v1\models\Thread';
-
-    public function fields()
-    {
-        return ['id', 'user_id'];
-    }
+    public $serializer = [
+        'class' => 'yii\rest\Serializer',
+        'collectionEnvelope' => 'items',
+    ];
 
 
 }
