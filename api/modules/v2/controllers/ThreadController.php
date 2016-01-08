@@ -84,6 +84,7 @@ class ThreadController extends ActiveController
     {
         $model = $this->findModel($id);
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+
         if (!$model->save()) {
             return array_values($model->getFirstErrors())[0];
         }

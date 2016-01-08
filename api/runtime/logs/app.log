@@ -6646,3 +6646,323 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1452229477.965
     'REQUEST_TIME' => 1452229477
 ]
+2016-01-08 06:48:34 [::1][-][-][error][yii\db\Exception] exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in D:\wamp\www\api\vendor\yiisoft\yii2\db\Connection.php:579
+Stack trace:
+#0 D:\wamp\www\api\vendor\yiisoft\yii2\db\Connection.php(579): PDO->__construct('mysql:host=loca...', 'root', '@shisan2015@', NULL)
+#1 D:\wamp\www\api\vendor\yiisoft\yii2\db\Connection.php(529): yii\db\Connection->createPdoInstance()
+#2 D:\wamp\www\api\vendor\yiisoft\yii2\db\Connection.php(836): yii\db\Connection->open()
+#3 D:\wamp\www\api\vendor\yiisoft\yii2\db\Connection.php(823): yii\db\Connection->getMasterPdo()
+#4 D:\wamp\www\api\vendor\yiisoft\yii2\db\Command.php(216): yii\db\Connection->getSlavePdo()
+#5 D:\wamp\www\api\vendor\yiisoft\yii2\db\Command.php(831): yii\db\Command->prepare(true)
+#6 D:\wamp\www\api\vendor\yiisoft\yii2\db\Command.php(385): yii\db\Command->queryInternal('fetchColumn', 0)
+#7 D:\wamp\www\api\vendor\yiisoft\yii2\db\Query.php(389): yii\db\Command->queryScalar()
+#8 D:\wamp\www\api\vendor\yiisoft\yii2\db\ActiveQuery.php(339): yii\db\Query->queryScalar('COUNT(*)', NULL)
+#9 D:\wamp\www\api\vendor\yiisoft\yii2\db\Query.php(296): yii\db\ActiveQuery->queryScalar('COUNT(*)', NULL)
+#10 D:\wamp\www\api\vendor\yiisoft\yii2\data\ActiveDataProvider.php(165): yii\db\Query->count('*', NULL)
+#11 D:\wamp\www\api\vendor\yiisoft\yii2\data\BaseDataProvider.php(147): yii\data\ActiveDataProvider->prepareTotalCount()
+#12 D:\wamp\www\api\vendor\yiisoft\yii2\data\ActiveDataProvider.php(105): yii\data\BaseDataProvider->getTotalCount()
+#13 D:\wamp\www\api\vendor\yiisoft\yii2\data\BaseDataProvider.php(79): yii\data\ActiveDataProvider->prepareModels()
+#14 D:\wamp\www\api\vendor\yiisoft\yii2\data\BaseDataProvider.php(92): yii\data\BaseDataProvider->prepare()
+#15 D:\wamp\www\api\vendor\yiisoft\yii2\rest\Serializer.php(174): yii\data\BaseDataProvider->getModels()
+#16 D:\wamp\www\api\vendor\yiisoft\yii2\rest\Serializer.php(143): yii\rest\Serializer->serializeDataProvider(Object(yii\data\ActiveDataProvider))
+#17 D:\wamp\www\api\vendor\yiisoft\yii2\rest\Controller.php(97): yii\rest\Serializer->serialize(Object(yii\data\ActiveDataProvider))
+#18 D:\wamp\www\api\vendor\yiisoft\yii2\rest\Controller.php(75): yii\rest\Controller->serializeData(Object(yii\data\ActiveDataProvider))
+#19 D:\wamp\www\api\vendor\yiisoft\yii2\base\Controller.php(153): yii\rest\Controller->afterAction(Object(yii\base\InlineAction), Object(yii\data\ActiveDataProvider))
+#20 D:\wamp\www\api\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('index', Array)
+#21 D:\wamp\www\api\vendor\yiisoft\yii2\web\Application.php(84): yii\base\Module->runAction('v2/user/index', Array)
+#22 D:\wamp\www\api\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#23 D:\wamp\www\api\api\web\index.php(17): yii\base\Application->run()
+#24 {main}
+
+Next exception 'yii\db\Exception' with message 'SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in D:\wamp\www\api\vendor\yiisoft\yii2\db\Connection.php:534
+Stack trace:
+#0 D:\wamp\www\api\vendor\yiisoft\yii2\db\Connection.php(836): yii\db\Connection->open()
+#1 D:\wamp\www\api\vendor\yiisoft\yii2\db\Connection.php(823): yii\db\Connection->getMasterPdo()
+#2 D:\wamp\www\api\vendor\yiisoft\yii2\db\Command.php(216): yii\db\Connection->getSlavePdo()
+#3 D:\wamp\www\api\vendor\yiisoft\yii2\db\Command.php(831): yii\db\Command->prepare(true)
+#4 D:\wamp\www\api\vendor\yiisoft\yii2\db\Command.php(385): yii\db\Command->queryInternal('fetchColumn', 0)
+#5 D:\wamp\www\api\vendor\yiisoft\yii2\db\Query.php(389): yii\db\Command->queryScalar()
+#6 D:\wamp\www\api\vendor\yiisoft\yii2\db\ActiveQuery.php(339): yii\db\Query->queryScalar('COUNT(*)', NULL)
+#7 D:\wamp\www\api\vendor\yiisoft\yii2\db\Query.php(296): yii\db\ActiveQuery->queryScalar('COUNT(*)', NULL)
+#8 D:\wamp\www\api\vendor\yiisoft\yii2\data\ActiveDataProvider.php(165): yii\db\Query->count('*', NULL)
+#9 D:\wamp\www\api\vendor\yiisoft\yii2\data\BaseDataProvider.php(147): yii\data\ActiveDataProvider->prepareTotalCount()
+#10 D:\wamp\www\api\vendor\yiisoft\yii2\data\ActiveDataProvider.php(105): yii\data\BaseDataProvider->getTotalCount()
+#11 D:\wamp\www\api\vendor\yiisoft\yii2\data\BaseDataProvider.php(79): yii\data\ActiveDataProvider->prepareModels()
+#12 D:\wamp\www\api\vendor\yiisoft\yii2\data\BaseDataProvider.php(92): yii\data\BaseDataProvider->prepare()
+#13 D:\wamp\www\api\vendor\yiisoft\yii2\rest\Serializer.php(174): yii\data\BaseDataProvider->getModels()
+#14 D:\wamp\www\api\vendor\yiisoft\yii2\rest\Serializer.php(143): yii\rest\Serializer->serializeDataProvider(Object(yii\data\ActiveDataProvider))
+#15 D:\wamp\www\api\vendor\yiisoft\yii2\rest\Controller.php(97): yii\rest\Serializer->serialize(Object(yii\data\ActiveDataProvider))
+#16 D:\wamp\www\api\vendor\yiisoft\yii2\rest\Controller.php(75): yii\rest\Controller->serializeData(Object(yii\data\ActiveDataProvider))
+#17 D:\wamp\www\api\vendor\yiisoft\yii2\base\Controller.php(153): yii\rest\Controller->afterAction(Object(yii\base\InlineAction), Object(yii\data\ActiveDataProvider))
+#18 D:\wamp\www\api\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('index', Array)
+#19 D:\wamp\www\api\vendor\yiisoft\yii2\web\Application.php(84): yii\base\Module->runAction('v2/user/index', Array)
+#20 D:\wamp\www\api\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#21 D:\wamp\www\api\api\web\index.php(17): yii\base\Application->run()
+#22 {main}
+Additional Information:
+
+2016-01-08 06:48:34 [::1][-][-][info][application] $_COOKIE = [
+    '_csrf' => '371dd42f40c295a247fd2f2dd7313e019a9b48c9523346b340e83bb08fb34756s:32:\"k7QVCASDffp0KHpXHvesB8StkE1vvNym\";'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost:83'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'
+    'HTTP_POSTMAN_TOKEN' => 'e2951c2e-ee1a-72ec-2ae9-45bc6a96e3a3'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8'
+    'HTTP_COOKIE' => '_csrf=371dd42f40c295a247fd2f2dd7313e019a9b48c9523346b340e83bb08fb34756s%3A32%3A%22k7QVCASDffp0KHpXHvesB8StkE1vvNym%22%3B'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;D:\\ampp\\mysql\\bin;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.9 (Win64) PHP/5.5.12 Server at localhost Port 83</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.9 (Win64) PHP/5.5.12'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '83'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => 'D:/wamp/www'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'D:/wamp/www'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'D:/wamp/www/api/api/web/index.php'
+    'REMOTE_PORT' => '60475'
+    'REDIRECT_URL' => '/api/api/web/v2/users'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/api/api/web/v2/users'
+    'SCRIPT_NAME' => '/api/api/web/index.php'
+    'PHP_SELF' => '/api/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1452232114.531
+    'REQUEST_TIME' => 1452232114
+]
+2016-01-08 06:48:36 [::1][-][-][error][yii\db\Exception] exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in D:\wamp\www\api\vendor\yiisoft\yii2\db\Connection.php:579
+Stack trace:
+#0 D:\wamp\www\api\vendor\yiisoft\yii2\db\Connection.php(579): PDO->__construct('mysql:host=loca...', 'root', '@shisan2015@', NULL)
+#1 D:\wamp\www\api\vendor\yiisoft\yii2\db\Connection.php(529): yii\db\Connection->createPdoInstance()
+#2 D:\wamp\www\api\vendor\yiisoft\yii2\db\Connection.php(836): yii\db\Connection->open()
+#3 D:\wamp\www\api\vendor\yiisoft\yii2\db\Connection.php(823): yii\db\Connection->getMasterPdo()
+#4 D:\wamp\www\api\vendor\yiisoft\yii2\db\Command.php(216): yii\db\Connection->getSlavePdo()
+#5 D:\wamp\www\api\vendor\yiisoft\yii2\db\Command.php(831): yii\db\Command->prepare(true)
+#6 D:\wamp\www\api\vendor\yiisoft\yii2\db\Command.php(385): yii\db\Command->queryInternal('fetchColumn', 0)
+#7 D:\wamp\www\api\vendor\yiisoft\yii2\db\Query.php(389): yii\db\Command->queryScalar()
+#8 D:\wamp\www\api\vendor\yiisoft\yii2\db\ActiveQuery.php(339): yii\db\Query->queryScalar('COUNT(*)', NULL)
+#9 D:\wamp\www\api\vendor\yiisoft\yii2\db\Query.php(296): yii\db\ActiveQuery->queryScalar('COUNT(*)', NULL)
+#10 D:\wamp\www\api\vendor\yiisoft\yii2\data\ActiveDataProvider.php(165): yii\db\Query->count('*', NULL)
+#11 D:\wamp\www\api\vendor\yiisoft\yii2\data\BaseDataProvider.php(147): yii\data\ActiveDataProvider->prepareTotalCount()
+#12 D:\wamp\www\api\vendor\yiisoft\yii2\data\ActiveDataProvider.php(105): yii\data\BaseDataProvider->getTotalCount()
+#13 D:\wamp\www\api\vendor\yiisoft\yii2\data\BaseDataProvider.php(79): yii\data\ActiveDataProvider->prepareModels()
+#14 D:\wamp\www\api\vendor\yiisoft\yii2\data\BaseDataProvider.php(92): yii\data\BaseDataProvider->prepare()
+#15 D:\wamp\www\api\vendor\yiisoft\yii2\rest\Serializer.php(174): yii\data\BaseDataProvider->getModels()
+#16 D:\wamp\www\api\vendor\yiisoft\yii2\rest\Serializer.php(143): yii\rest\Serializer->serializeDataProvider(Object(yii\data\ActiveDataProvider))
+#17 D:\wamp\www\api\vendor\yiisoft\yii2\rest\Controller.php(97): yii\rest\Serializer->serialize(Object(yii\data\ActiveDataProvider))
+#18 D:\wamp\www\api\vendor\yiisoft\yii2\rest\Controller.php(75): yii\rest\Controller->serializeData(Object(yii\data\ActiveDataProvider))
+#19 D:\wamp\www\api\vendor\yiisoft\yii2\base\Controller.php(153): yii\rest\Controller->afterAction(Object(yii\base\InlineAction), Object(yii\data\ActiveDataProvider))
+#20 D:\wamp\www\api\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('index', Array)
+#21 D:\wamp\www\api\vendor\yiisoft\yii2\web\Application.php(84): yii\base\Module->runAction('v2/user/index', Array)
+#22 D:\wamp\www\api\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#23 D:\wamp\www\api\api\web\index.php(17): yii\base\Application->run()
+#24 {main}
+
+Next exception 'yii\db\Exception' with message 'SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in D:\wamp\www\api\vendor\yiisoft\yii2\db\Connection.php:534
+Stack trace:
+#0 D:\wamp\www\api\vendor\yiisoft\yii2\db\Connection.php(836): yii\db\Connection->open()
+#1 D:\wamp\www\api\vendor\yiisoft\yii2\db\Connection.php(823): yii\db\Connection->getMasterPdo()
+#2 D:\wamp\www\api\vendor\yiisoft\yii2\db\Command.php(216): yii\db\Connection->getSlavePdo()
+#3 D:\wamp\www\api\vendor\yiisoft\yii2\db\Command.php(831): yii\db\Command->prepare(true)
+#4 D:\wamp\www\api\vendor\yiisoft\yii2\db\Command.php(385): yii\db\Command->queryInternal('fetchColumn', 0)
+#5 D:\wamp\www\api\vendor\yiisoft\yii2\db\Query.php(389): yii\db\Command->queryScalar()
+#6 D:\wamp\www\api\vendor\yiisoft\yii2\db\ActiveQuery.php(339): yii\db\Query->queryScalar('COUNT(*)', NULL)
+#7 D:\wamp\www\api\vendor\yiisoft\yii2\db\Query.php(296): yii\db\ActiveQuery->queryScalar('COUNT(*)', NULL)
+#8 D:\wamp\www\api\vendor\yiisoft\yii2\data\ActiveDataProvider.php(165): yii\db\Query->count('*', NULL)
+#9 D:\wamp\www\api\vendor\yiisoft\yii2\data\BaseDataProvider.php(147): yii\data\ActiveDataProvider->prepareTotalCount()
+#10 D:\wamp\www\api\vendor\yiisoft\yii2\data\ActiveDataProvider.php(105): yii\data\BaseDataProvider->getTotalCount()
+#11 D:\wamp\www\api\vendor\yiisoft\yii2\data\BaseDataProvider.php(79): yii\data\ActiveDataProvider->prepareModels()
+#12 D:\wamp\www\api\vendor\yiisoft\yii2\data\BaseDataProvider.php(92): yii\data\BaseDataProvider->prepare()
+#13 D:\wamp\www\api\vendor\yiisoft\yii2\rest\Serializer.php(174): yii\data\BaseDataProvider->getModels()
+#14 D:\wamp\www\api\vendor\yiisoft\yii2\rest\Serializer.php(143): yii\rest\Serializer->serializeDataProvider(Object(yii\data\ActiveDataProvider))
+#15 D:\wamp\www\api\vendor\yiisoft\yii2\rest\Controller.php(97): yii\rest\Serializer->serialize(Object(yii\data\ActiveDataProvider))
+#16 D:\wamp\www\api\vendor\yiisoft\yii2\rest\Controller.php(75): yii\rest\Controller->serializeData(Object(yii\data\ActiveDataProvider))
+#17 D:\wamp\www\api\vendor\yiisoft\yii2\base\Controller.php(153): yii\rest\Controller->afterAction(Object(yii\base\InlineAction), Object(yii\data\ActiveDataProvider))
+#18 D:\wamp\www\api\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('index', Array)
+#19 D:\wamp\www\api\vendor\yiisoft\yii2\web\Application.php(84): yii\base\Module->runAction('v2/user/index', Array)
+#20 D:\wamp\www\api\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#21 D:\wamp\www\api\api\web\index.php(17): yii\base\Application->run()
+#22 {main}
+Additional Information:
+
+2016-01-08 06:48:36 [::1][-][-][info][application] $_COOKIE = [
+    '_csrf' => '371dd42f40c295a247fd2f2dd7313e019a9b48c9523346b340e83bb08fb34756s:32:\"k7QVCASDffp0KHpXHvesB8StkE1vvNym\";'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost:83'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'
+    'HTTP_POSTMAN_TOKEN' => '48b90404-e5ba-9306-0fc7-59f5a99de835'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8'
+    'HTTP_COOKIE' => '_csrf=371dd42f40c295a247fd2f2dd7313e019a9b48c9523346b340e83bb08fb34756s%3A32%3A%22k7QVCASDffp0KHpXHvesB8StkE1vvNym%22%3B'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;D:\\ampp\\mysql\\bin;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.9 (Win64) PHP/5.5.12 Server at localhost Port 83</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.9 (Win64) PHP/5.5.12'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '83'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => 'D:/wamp/www'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'D:/wamp/www'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'D:/wamp/www/api/api/web/index.php'
+    'REMOTE_PORT' => '60481'
+    'REDIRECT_URL' => '/api/api/web/v2/users'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/api/api/web/v2/users'
+    'SCRIPT_NAME' => '/api/api/web/index.php'
+    'PHP_SELF' => '/api/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1452232116.548
+    'REQUEST_TIME' => 1452232116
+]
+2016-01-08 06:51:39 [::1][-][-][error][yii\base\ErrorException:8] exception 'yii\base\ErrorException' with message 'Undefined variable: actions' in D:\wamp\www\api\api\modules\v2\controllers\UserController.php:37
+Stack trace:
+#0 D:\wamp\www\api\vendor\yiisoft\yii2\base\Controller.php(120): yii\base\Controller->createAction()
+#1 D:\wamp\www\api\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction()
+#2 D:\wamp\www\api\vendor\yiisoft\yii2\web\Application.php(84): yii\base\Module->runAction()
+#3 D:\wamp\www\api\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest()
+#4 D:\wamp\www\api\api\web\index.php(17): yii\base\Application->run()
+#5 {main}
+2016-01-08 06:51:39 [::1][-][-][info][application] $_COOKIE = [
+    '_csrf' => '371dd42f40c295a247fd2f2dd7313e019a9b48c9523346b340e83bb08fb34756s:32:\"k7QVCASDffp0KHpXHvesB8StkE1vvNym\";'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost:83'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'
+    'HTTP_POSTMAN_TOKEN' => '47102835-d853-b0b9-c101-650ce841adba'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8'
+    'HTTP_COOKIE' => '_csrf=371dd42f40c295a247fd2f2dd7313e019a9b48c9523346b340e83bb08fb34756s%3A32%3A%22k7QVCASDffp0KHpXHvesB8StkE1vvNym%22%3B'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;D:\\ampp\\mysql\\bin;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.9 (Win64) PHP/5.5.12 Server at localhost Port 83</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.9 (Win64) PHP/5.5.12'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '83'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => 'D:/wamp/www'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'D:/wamp/www'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'D:/wamp/www/api/api/web/index.php'
+    'REMOTE_PORT' => '60562'
+    'REDIRECT_URL' => '/api/api/web/v2/users'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/api/api/web/v2/users'
+    'SCRIPT_NAME' => '/api/api/web/index.php'
+    'PHP_SELF' => '/api/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1452232299.855
+    'REQUEST_TIME' => 1452232299
+]
+2016-01-08 06:52:18 [::1][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request: v2/user/create' in D:\wamp\www\api\vendor\yiisoft\yii2\base\Controller.php:122
+Stack trace:
+#0 D:\wamp\www\api\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('create', Array)
+#1 D:\wamp\www\api\vendor\yiisoft\yii2\web\Application.php(84): yii\base\Module->runAction('v2/user/create', Array)
+#2 D:\wamp\www\api\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 D:\wamp\www\api\api\web\index.php(17): yii\base\Application->run()
+#4 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in D:\wamp\www\api\vendor\yiisoft\yii2\web\Application.php:96
+Stack trace:
+#0 D:\wamp\www\api\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 D:\wamp\www\api\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2016-01-08 06:52:18 [::1][-][-][info][application] $_POST = [
+    'content' => 'tqlmm2kr'
+    'image_path' => 'Wm5Oa2EyRnFabXhrWVdwelpteHpabVJyYW5OaFpteGthMnB6Wkd0cVpuTnNaR3RxWmc9PSxmamV3YTtsZmp3YWVqZndlZmo=,Wm5Oa2EyRnFabXhrWVdwelpteHpabVJyYW5OaFpteGthMnB6Wkd0cVpuTnNaR3RxWmc9PSxmamV3YTtsZmp3YWVqZndlZmo=='
+    'user_id' => '10001'
+]
+
+$_COOKIE = [
+    '_csrf' => '371dd42f40c295a247fd2f2dd7313e019a9b48c9523346b340e83bb08fb34756s:32:\"k7QVCASDffp0KHpXHvesB8StkE1vvNym\";'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost:83'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '244'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'
+    'HTTP_POSTMAN_TOKEN' => '1bae9cc9-5bfb-52fc-a996-f948fb97a976'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8'
+    'HTTP_COOKIE' => '_csrf=371dd42f40c295a247fd2f2dd7313e019a9b48c9523346b340e83bb08fb34756s%3A32%3A%22k7QVCASDffp0KHpXHvesB8StkE1vvNym%22%3B'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;D:\\ampp\\mysql\\bin;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.9 (Win64) PHP/5.5.12 Server at localhost Port 83</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.9 (Win64) PHP/5.5.12'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '83'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => 'D:/wamp/www'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'D:/wamp/www'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'D:/wamp/www/api/api/web/index.php'
+    'REMOTE_PORT' => '60581'
+    'REDIRECT_URL' => '/api/api/web/v2/users'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/api/api/web/v2/users'
+    'SCRIPT_NAME' => '/api/api/web/index.php'
+    'PHP_SELF' => '/api/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1452232338.268
+    'REQUEST_TIME' => 1452232338
+]

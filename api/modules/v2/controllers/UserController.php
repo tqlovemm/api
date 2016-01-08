@@ -1,6 +1,6 @@
 <?php
 
-namespace api\modules\v1\controllers;
+namespace api\modules\v2\controllers;
 
 use Yii;
 use yii\rest\ActiveController;
@@ -8,10 +8,11 @@ use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\QueryParamAuth;
+use yii\helpers\Response;
 
 class UserController extends ActiveController
 {
-    public $modelClass = 'app\modules\v1\models\User';
+    public $modelClass = 'api\modules\v2\models\User';
     public $serializer = [
         'class' => 'yii\rest\Serializer',
         'collectionEnvelope' => 'items',
@@ -49,29 +50,34 @@ class UserController extends ActiveController
 
     public function actionCreate()
     {
-        $model = new $this->modelClass();
+       /* $model = new $this->modelClass();
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
         $model->email = base64_encode($model->email);
         if (!$model->save()) {
             return array_values($model->getFirstErrors())[0];
         }
 
-        return $model;
+        return $model;*/
+        Response::show(401,'不允许的操作');
+
     }
 
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+   /*    $model = $this->findModel($id);
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
         if (!$model->save()) {
             return array_values($model->getFirstErrors())[0];
         }
-        return $model;
+        return $model;*/
+
+        Response::show(401,'不允许的操作');
     }
 
     public function actionDelete($id)
     {
-        return $this->findModel($id)->delete();
+        /*return $this->findModel($id)->delete();*/
+        Response::show(401,'不允许的操作');
     }
 
     public function actionView($id)

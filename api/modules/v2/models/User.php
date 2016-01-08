@@ -1,6 +1,6 @@
 <?php
 
-namespace api\modules\v1\models;
+namespace api\modules\v2\models;
 
 use app\components\db\ActiveRecord;
 use Yii;
@@ -75,7 +75,7 @@ class User extends ActiveRecord implements IdentityInterface
         $fields = parent::fields();
 
         // remove fields that contain sensitive information
-        unset($fields['auth_key'], $fields['password_hash'], $fields['password_reset_token']);
+        unset($fields['auth_key'], $fields['password_hash'], $fields['password_reset_token'],$fields['avatarid'],$fields['avatartemp'],$fields['role']);
 
         return $fields;
     }
