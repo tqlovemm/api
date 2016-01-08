@@ -42,7 +42,7 @@ class UserController extends ActiveController
     public function actionIndex()
     {
         $modelClass = $this->modelClass;
-        $query = $modelClass::find()->all();;
+        $query = $modelClass::find();
         return new ActiveDataProvider([
             'query' => $query,
         ]);
