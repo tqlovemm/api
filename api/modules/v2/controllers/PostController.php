@@ -90,7 +90,6 @@ class PostController extends ActiveController
     {
         $modelClass = $this->modelClass;
 
-
             if (($model = $modelClass::findOne($id)) !== null) {
                 return $model;
             } else {
@@ -103,7 +102,7 @@ class PostController extends ActiveController
 
         $modelClass = $this->modelClass;
 
-        if (($model = $modelClass::find()->where(['thread_id'=>$thread_id])->orderBy('created_at DESC')->all()) !== null) {
+        if (($model = $modelClass::find()->where('thread_id=:thread_id',['thread_id'=>$thread_id])->orderBy('created_at DESC')->all()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -18,14 +18,14 @@ DELETE v2/threads/ID 删除单个帖子，不支持多贴删除
 
 评论贴表：posts 可以增删改查
 
-GET V2/posts 查看所有帖子信息
-GET V2/posts/ID 查看单个帖子信息
+GET V2/posts 查看所有帖子的所有评论信息
+GET V2/posts/帖子ID  查看单个帖子的评论信息
 
-POST v2/posts  加post参数 content,thread_id,user_id
+POST v2/posts   加post参数 content,thread_id,user_id
 
-DELETE v2/posts/ID 删除单个评论，不支持多条删除
+DELETE v2/posts/ID  删除单个评论，不支持多条删除
 
-PATCH v2/posts/ID 更新用户评论 可更新内容：content
+PATCH v2/posts/ID  更新用户评论 可更新内容：content
 
 
 
