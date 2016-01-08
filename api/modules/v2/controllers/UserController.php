@@ -82,7 +82,11 @@ class UserController extends ActiveController
 
     public function actionView($id)
     {
-        return $this->findModel($id);
+
+        $command = Yii::$app->db->createCommand('SELECT * FROM {{%user}} as u LEFT JOIN {{%user_data}} as ud ON ud.user_id=u.id LEFT JOIN {{%user_profile}} as up ON up.user_id=u.id WHERE id='.$id);
+        $post = $command->queryAll();
+        return $post;
+
     }
 
     protected function findModel($id)
