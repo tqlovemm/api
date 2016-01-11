@@ -84,34 +84,6 @@ class UserController extends ActiveController
         Response::show(401,'不允许的操作');
     }
 
-    /*
-     *
-    "id": "10001",
-    "groupid": "1",
-    "username": "tqlmm",
-    "cellphone": "15851429071",
-    "sex": "0",
-    "email": "214783477@qq.com",
-    "status": "10",
-    "created_at": "1446453654",
-    "avatar": "http://182.254.217.147:8888/uploads/user/avatar/10001_14509340161523.jpg",
-    "post_count": "1",
-    "feed_count": "1",
-    "following_count": "3",
-    "follower_count": "4",
-    "unread_message_count": "0",
-    "thread_count": "20",
-    "empirical_value": "19",
-    "birthdate": "1989-09-20",
-    "signature": "我最棒，我好棒",
-    "address": "工业园区",
-    "mark": "[\"\u53a8\u827a\u597d\",\"\u6709\u808c\u8089\",\"\u6d6a\u6f2b\",\"\u4ea4\u9645\u82b1\",\"\u817c\u8146\"]",
-    "make_friend": "[\"\u5916\u89c2\u63a7\",\"\u8eab\u6750\u63a7\",\"\u5b66\u5386\u9ad8\"]",
-    "hobby": "[\"\u8e66\u6781\",\"\u9493\u9c7c\",\"\u722c\u5c71\",\"\u4ea4\u53cb\"]",
-    "height": "158",
-    "weight": "66",
-    "self_introduction": "我是一个好人"
-     * */
     public function actionView($id)
     {
         $command = Yii::$app->db->createCommand('SELECT u.id as user_id,u.groupid,u.username,u.email,u.cellphone,u.sex,u.status,u.avatar,u.created_at,
@@ -120,8 +92,8 @@ class UserController extends ActiveController
                                                         FROM {{%user}} as u LEFT JOIN {{%user_data}} as ud ON ud.user_id=u.id LEFT JOIN {{%user_profile}} as up ON up.user_id=u.id WHERE id='.$id);
         $post = $command->queryAll();
         $post[0]['avatar']= 'http://182.254.217.147:8888/uploads/user/avatar/'.$post[0]['avatar'];
-        return $post;
-/*        $model = $this->findModel($id);
+        return $post[0];
+/*      $model = $this->findModel($id);
         $model->avatar = 'http://182.254.217.147:8888/uploads/user/avatar/'.$model->avatar;
         return $model;*/
 
