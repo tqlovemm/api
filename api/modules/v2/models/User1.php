@@ -91,7 +91,8 @@ class User1 extends ActiveRecord implements IdentityInterface,Linkable
 
     public function getThread(){
 
-        return Yii::$app->db->createCommand("select t.* from {{%forum_thread}} as t WHERE t.user_id=".$this->id)->queryAll();
+
+        return Yii::$app->db->createCommand("select t.id as thread_id,t.content,t.created_at,t.updated_at,t.post_count,t.note,t.read_count,t.is_stick,t.image_path as  image from {{%forum_thread}} as t WHERE t.user_id=".$this->id)->queryAll();
 
     }
     public function extraFields()
