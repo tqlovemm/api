@@ -24,7 +24,7 @@ use yii\web\Linkable;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class User extends ActiveRecord implements IdentityInterface,Linkable
+class User1 extends ActiveRecord implements IdentityInterface,Linkable
 {
     public static function findIdentity($id)
     {
@@ -88,20 +88,7 @@ class User extends ActiveRecord implements IdentityInterface,Linkable
 
         return $fields;
     }
-    public function getData(){
 
-
-        return Yii::$app->db->createCommand("select d.* from {{%user_data}} as d WHERE d.user_id=".$this->id)->queryOne();
-
-
-    }
-    public function getProfile(){
-
-
-        return Yii::$app->db->createCommand("select p.* from {{%user_profile}} as p WHERE p.user_id=".$this->id)->queryOne();
-
-
-    }
     public function getThread(){
 
         return Yii::$app->db->createCommand("select t.* from {{%forum_thread}} as t WHERE t.user_id=".$this->id)->queryAll();
@@ -110,8 +97,6 @@ class User extends ActiveRecord implements IdentityInterface,Linkable
     public function extraFields()
     {
         return [
-            'data' => 'data',
-            'profile'=>'profile',
             'thread'=>'thread',
         ];
     }
