@@ -109,6 +109,13 @@ class ThreadController extends ActiveController
 
     }
 
+    public function actionViews($id){
+
+
+        return $this->findModels($id);
+
+    }
+
     protected function findModel($id)
     {
         $modelClass = $this->modelClass;
@@ -118,5 +125,15 @@ class ThreadController extends ActiveController
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    protected function findModels($id)
+    {
+        $modelClass = $this->modelClass;
+        if (($model = $modelClass::find()->where('user_id='.$id)->all()) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
 
 }

@@ -92,11 +92,17 @@ class User extends ActiveRecord implements IdentityInterface
 
 
     }
+    public function getThread(){
+
+        return Yii::$app->db->createCommand("select t.* from {{%forum_thread}} as t WHERE t.user_id=".$this->id)->queryAll();
+
+    }
     public function extraFields()
     {
         return [
             'data' => 'data',
             'profile'=>'profile',
+            'thread'=>'thread',
         ];
     }
 

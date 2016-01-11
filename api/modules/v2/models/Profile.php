@@ -2,39 +2,44 @@
 
 namespace api\modules\v2\models;
 
-use app\components\db\ActiveRecord;
 use Yii;
-
+use app\components\db\ActiveRecord;
 
 /**
- * This is the model class for table "forum_post".
+ * This is the model class for table "user_profile".
  *
- * @property integer $id
- * @property string $content
  * @property integer $user_id
- * @property integer $thread_id
- * @property integer $created_at
- * @property integer $updated_at
+ * @property string $birthdate
+ * @property string $signatrue
+ * @property string $address
+ * @property string $description
+ * @property string $mark
+ * @property string $make_friend
+ * @property string $hobby
+ * @property integer $height
+ * @property integer $weight
+ *
  */
-class Post extends ActiveRecord
+class Profile extends ActiveRecord
 {
 
     public static function tableName()
     {
-        return '{{%forum_post}}';
+        return '{{%user_profile}}';
     }
 
     public function getId()
     {
-        return $this->id;
+        return $this->user_id;
     }
 
 
     public function rules()
     {
         return [
-            [['content','user_id','thread_id'], 'required'],
-            [['created_at','updated_at','user_id','thread_id'], 'integer'],
+            [['user_id','height','weight'], 'integer'],
+            [['address','mark','hobby','make_friend','signatrue','description'], 'string'],
+            [['birthdate'],'string']
         ];
     }
 
@@ -62,18 +67,19 @@ class Post extends ActiveRecord
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'content' => '内容',
             'user_id' => '用户ID',
-            'thread_id' => '帖子ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'birthdate' => '生日',
+            'signatrue' => '个人签名',
+            'address' => '地址',
+            'make_friend' => '交友要求',
+            'description' => '自我介绍',
+            'mark' => '标签',
+            'hobby' => '兴趣爱好',
+            'height' => '身高',
+            'weight' => '体重',
 
         ];
     }

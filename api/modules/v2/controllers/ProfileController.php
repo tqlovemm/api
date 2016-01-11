@@ -3,16 +3,16 @@
 namespace api\modules\v2\controllers;
 
 use Yii;
+use yii\filters\auth\CompositeAuth;
+use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
-use yii\filters\auth\CompositeAuth;
-use yii\filters\auth\QueryParamAuth;
 use yii\helpers\Response;
 
-class UserController extends ActiveController
+class ProfileController extends ActiveController
 {
-    public $modelClass = 'api\modules\v2\models\User';
+    public $modelClass = 'api\modules\v2\models\Profile';
     public $serializer = [
         'class' => 'yii\rest\Serializer',
         'collectionEnvelope' => 'items',
@@ -22,7 +22,7 @@ class UserController extends ActiveController
     {
         $behaviors = parent::behaviors();
         // token 验证  请按需开启
-         /*$behaviors['authenticator'] = [
+      /*   $behaviors['authenticator'] = [
              'class' => CompositeAuth::className(),
              'authMethods' => [
                  QueryParamAuth::className(),
@@ -43,59 +43,69 @@ class UserController extends ActiveController
     {
         $modelClass = $this->modelClass;
         $query = $modelClass::find();
-
         return new ActiveDataProvider([
             'query' => $query,
         ]);
     }
 
+    public function actionView($id)
+    {
+
+        $query = $this->findModels($id);
+        return new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+    }
     public function actionCreate()
     {
-       /* $model = new $this->modelClass();
+        $model = new $this->modelClass();
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
         if (!$model->save()) {
             return array_values($model->getFirstErrors())[0];
         }
 
-        return $model;*/
-        Response::show(401,'不允许的操作');
-
+        Response::show('202','保存成功');
     }
 
     public function actionUpdate($id)
     {
-   /*   $model = $this->findModel($id);
+        $model = $this->findModel($id);
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+
         if (!$model->save()) {
             return array_values($model->getFirstErrors())[0];
         }
-        return $model;*/
 
-        Response::show(401,'不允许的操作');
+        Response::show(202,'更新成功');
     }
 
     public function actionDelete($id)
     {
-        /*return $this->findModel($id)->delete();*/
-        Response::show(401,'不允许的操作');
-    }
+        if($this->findModel($id)->delete()){
 
-    public function actionView($id)
-    {
+            Response::show('202','删除成功');
 
- /*       $command = Yii::$app->db->createCommand('SELECT * FROM {{%user}} as u LEFT JOIN {{%user_data}} as ud ON ud.user_id=u.id LEFT JOIN {{%user_profile}} as up ON up.user_id=u.id WHERE id='.$id);
-        $post = $command->queryAll();
-        return $post;*/
-        $model = $this->findModel($id);
-        $model->avatar = 'http://182.254.217.147:8888/uploads/user/avatar/'.$model->avatar;
-        return $model;
-
+        }
     }
 
     protected function findModel($id)
     {
         $modelClass = $this->modelClass;
-        if (($model = $modelClass::findOne($id)) !== null) {
+
+            if (($model = $modelClass::findOne($id)) !== null) {
+                return $model;
+            } else {
+                throw new NotFoundHttpException('The requested page does not exist.');
+            }
+
+
+    }
+    protected function findModels($user_id){
+
+        $modelClass = $this->modelClass;
+
+        if (($model = $modelClass::find()->where('user_id=:user_id',[':user_id'=>$user_id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
