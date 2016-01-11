@@ -678,4 +678,5 @@ class User extends Component
     {
         return Yii::$app->getAuthManager();
     }
+
 }
