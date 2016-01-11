@@ -51,6 +51,7 @@ class PostController extends ActiveController
     public function actionView($id)
     {
         $query = $this->findModels($id);
+
         return new ActiveDataProvider([
             'query' => $query,
         ]);

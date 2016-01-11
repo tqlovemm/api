@@ -78,6 +78,27 @@ class User extends ActiveRecord implements IdentityInterface
 
         return $fields;
     }
+    public function getData(){
+
+
+        return Yii::$app->db->createCommand("select d.* from {{%user_data}} as d WHERE d.user_id=".$this->id)->queryAll();
+
+
+    }
+    public function getProfile(){
+
+
+        return Yii::$app->db->createCommand("select p.* from {{%user_profile}} as p WHERE p.user_id=".$this->id)->queryAll();
+
+
+    }
+    public function extraFields()
+    {
+        return [
+            'data' => 'data',
+            'profile'=>'profile',
+        ];
+    }
 
     /**
      * @inheritdoc

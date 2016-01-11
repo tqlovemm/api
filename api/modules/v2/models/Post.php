@@ -28,10 +28,7 @@ class Post extends ActiveRecord
     {
         return $this->id;
     }
-    public function getUid()
-    {
-        return $this->user_id;
-    }
+
 
     public function rules()
     {
@@ -53,7 +50,10 @@ class Post extends ActiveRecord
     }
     public function getUser()
     {
-        return User::find()->where('id=:uid',[':uid'=>$this->uid])->orderBy('created_at DESC');
+        $model = User::find()->select("id,username,groupid,sex,email,avatar,cellphone")->where('id=:uid',[':uid'=>$this->user_id])->orderBy('created_at DESC');
+
+
+        return $model;
     }
 
     public function extraFields()
