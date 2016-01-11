@@ -91,14 +91,14 @@ class User extends ActiveRecord implements IdentityInterface,Linkable
     public function getData(){
 
 
-        return Yii::$app->db->createCommand("select d.* from {{%user_data}} as d WHERE d.user_id=".$this->id)->queryAll();
+        return Yii::$app->db->createCommand("select d.* from {{%user_data}} as d WHERE d.user_id=".$this->id)->queryOne();
 
 
     }
     public function getProfile(){
 
 
-        return Yii::$app->db->createCommand("select p.* from {{%user_profile}} as p WHERE p.user_id=".$this->id)->queryAll();
+        return Yii::$app->db->createCommand("select p.* from {{%user_profile}} as p WHERE p.user_id=".$this->id)->queryOne();
 
 
     }
