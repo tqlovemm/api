@@ -3,7 +3,6 @@
 namespace api\modules\v2\controllers;
 
 use Yii;
-use yii\data\Pagination;
 use yii\rest\ActiveController;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
@@ -19,8 +18,6 @@ class UserController extends ActiveController
         'collectionEnvelope' => 'items',
 
     ];
-
-
 
     public function behaviors()
     {

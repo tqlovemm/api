@@ -2,6 +2,7 @@
 
 namespace api\modules\v2\controllers;
 
+use api\modules\v2\models\Post;
 use Yii;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\QueryParamAuth;
@@ -66,6 +67,7 @@ class PostController extends ActiveController
             return array_values($model->getFirstErrors())[0];
         }
 
+        $model->PostCuntPlus();
         Response::show('202','保存成功');
     }
 
