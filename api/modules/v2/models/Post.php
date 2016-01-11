@@ -42,11 +42,20 @@ class Post extends ActiveRecord
     public function fields()
     {
         $fields = parent::fields();
-
+        $fields["post_id"] = $fields['id'];
         // remove fields that contain sensitive information
-        unset($fields['auth_key'], $fields['password_hash'], $fields['password_reset_token']);
+        unset($fields['id']);
 
         return $fields;
+
+     /*   return [
+            'post_id'=>'id',
+            'content'=>'content',
+            'user_id'=>'user_id',
+            'thread_id'=>'thread_id',
+            'created_at'=>'created_at',
+            'updated_at'=>'updated_at',
+        ];*/
     }
     public function getUser()
     {

@@ -3,6 +3,7 @@
 namespace api\modules\v2\controllers;
 
 use Yii;
+use yii\data\Pagination;
 use yii\rest\ActiveController;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
@@ -16,7 +17,10 @@ class UserController extends ActiveController
     public $serializer = [
         'class' => 'yii\rest\Serializer',
         'collectionEnvelope' => 'items',
+
     ];
+
+
 
     public function behaviors()
     {
@@ -82,13 +86,13 @@ class UserController extends ActiveController
 
     public function actionView($id)
     {
-
- /*       $command = Yii::$app->db->createCommand('SELECT * FROM {{%user}} as u LEFT JOIN {{%user_data}} as ud ON ud.user_id=u.id LEFT JOIN {{%user_profile}} as up ON up.user_id=u.id WHERE id='.$id);
+        $command = Yii::$app->db->createCommand('SELECT * FROM {{%user}} as u LEFT JOIN {{%user_data}} as ud ON ud.user_id=u.id LEFT JOIN {{%user_profile}} as up ON up.user_id=u.id WHERE id='.$id);
         $post = $command->queryAll();
-        return $post;*/
-        $model = $this->findModel($id);
+        $post[0]['avatar']= 'http://182.254.217.147:8888/uploads/user/avatar/'.$post[0]['avatar'];
+        return $post;
+/*        $model = $this->findModel($id);
         $model->avatar = 'http://182.254.217.147:8888/uploads/user/avatar/'.$model->avatar;
-        return $model;
+        return $model;*/
 
     }
 

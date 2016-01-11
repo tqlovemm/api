@@ -4,7 +4,10 @@ namespace api\modules\v2\models;
 
 use app\components\db\ActiveRecord;
 use Yii;
+use yii\helpers\Url;
 use yii\web\IdentityInterface;
+use yii\web\Link;
+use yii\web\Linkable;
 
 /**
  * This is the model class for table "user".
@@ -21,11 +24,18 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends ActiveRecord implements IdentityInterface,Linkable
 {
     public static function findIdentity($id)
     {
         return static::findOne($id);
+    }
+    public function getLinks()
+    {
+        // TODO: Implement getLinks() method.
+        return [
+            Link::REL_SELF => Url::to(['user/view', 'id' => $this->id], true),
+        ];
     }
 
     public static function findIdentityByAccessToken($token, $type = null)
