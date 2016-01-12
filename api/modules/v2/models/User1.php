@@ -98,7 +98,7 @@ class User1 extends ActiveRecord implements IdentityInterface,Linkable
 
            $model[$i]['image'] = json_decode($model[$i]['image']);
            $preg = "/<\/?[^>]+>/i";
-           $model[$i]['content'] = preg_replace($preg,'',$model[$i]['content']);
+           $model[$i]['content'] = trim(preg_replace($preg,'',$model[$i]['content']),'&nbsp;');
 
        }
 
