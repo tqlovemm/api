@@ -91,12 +91,11 @@ class User1 extends ActiveRecord implements IdentityInterface,Linkable
 
     public function getThread(){
 
-       $model = Yii::$app->db->createCommand("select t.id as thread_id,t.content,t.created_at,t.updated_at,t.post_count,t.note,t.read_count,t.is_stick,t.image_path as image from {{%forum_thread}} as t WHERE t.user_id=".$this->id)->queryAll();
-
+       $model = Yii::$app->db->createCommand("select t.id as thread_id,t.content,t.created_at,t.updated_at,t.post_count,t.note,t.read_count,t.is_stick,t.image_path from {{%forum_thread}} as t WHERE t.user_id=".$this->id)->queryAll();
 
        for($i=0;$i<count($model);$i++){
 
-           $model[$i]['image'] = json_decode($model[$i]['image']);
+           $model[$i]['image_path'] = json_decode($model[$i]['image_path']);
            $preg = "/<\/?[^>]+>/i";
            $model[$i]['content'] = trim(preg_replace($preg,'',$model[$i]['content']),'&nbsp;');
 
