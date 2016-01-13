@@ -96,9 +96,9 @@ class Thread extends ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
-    public function changeCount($num=1){
+    public function changeCount(){
 
-        Data::updateKey('thread_count',$this->user_id,$num);
+        Data::updateKey('thread_count',$this->user_id);
     }
 
 }
