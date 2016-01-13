@@ -44,8 +44,9 @@ class Thread extends ActiveRecord
     public function getUser(){
 
 
-        return User::find()->select('username,email,cellphone,sex,avatar');
-
+        $user = Yii::$app->db->createCommand('select u.id as user_id,u.groupid,u.username,u.email,u.cellphone,u.sex,u.status,u.avatar,u.created_at,d.* from {{%user}} as u LEFT JOIN {{%user_data}} as d ON d.user_id=u.id')->queryOne();
+        $user['avatar']='http://182.254.217.147:8888/uploads/user/avatar/'.$user['avatar'];
+        return $user;
     }
     public function extraFields()
     {
@@ -57,33 +58,19 @@ class Thread extends ActiveRecord
     public function fields()
     {
         //$fields = parent::fields();
-/* "id": 1139,
-      "title": "人厨房秤",
-      "content": "<p><img src=\"http://13loveme.com/uploads/umeditor/20151209/14496519659767.jpg\" _src=\"http://13loveme.com/uploads/umeditor/20151209/14496519659767.jpg\"/></p>",
-      "created_at": 1449651974,
-      "updated_at": 1450162892,
-      "user_id": 10054,
-      "board_id": 1003,
-      "post_count": 0,
-      "note": 2,
-      "read_count": 76,
-      "is_stick": 0,
-      "image_path"
- * */
 
         // remove fields that contain sensitive information
         // unset($fields['auth_key'], $fields['password_hash'], $fields['password_reset_token']);
 
         return [
 
-            'id','created_at','updated_at','user_id','post_count','note','read_count','is_stick',
+            'thread_id'=>'id','created_at','updated_at','user_id','post_count','note','read_count','is_stick',
             'content'=>function($model){
 
                 $preg = "/<\/?[^>]+>/i";
                 return $model['content'] = trim(preg_replace($preg,'',$model['content']),'&nbsp;');
             },
             'image_path'=>function($model){
-
 
                 return json_decode($model['image_path']);
             }
