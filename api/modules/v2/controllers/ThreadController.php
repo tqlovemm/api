@@ -113,9 +113,6 @@ class ThreadController extends ActiveController
     {
 
         $model = $this->findModel($id);
-        $preg = "/<\/?[^>]+>/i";
-        $model['content'] = trim(preg_replace($preg,'',$model['content']),'&nbsp;');
-        $model['image_path'] = json_decode($model->image_path);
 
         return $model;
 
