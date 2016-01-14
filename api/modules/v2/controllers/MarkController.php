@@ -8,7 +8,7 @@ use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
-use yii\helpers\Response;
+
 
 class MarkController extends ActiveController
 {
@@ -38,17 +38,18 @@ class MarkController extends ActiveController
 
     public function actionIndex()
     {
-        $modelClass = $this->modelClass;
-        $query = $modelClass::find();
-        return new ActiveDataProvider([
-            'query' => $query,
-        ]);
+        $query = Yii::$app->db->createCommand('SELECT GROUP_CONCAT(hobby_name) as hobby,GROUP_CONCAT(mark_name) as mark,GROUP_CONCAT(make_friend_name) as make_friend FROM {{%user_mark}}')->queryOne();
+        $query['mark'] = array_filter(explode(',',$query['mark']));
+        $query['make_friend'] = array_filter(explode(',',$query['make_friend']));
+        $query['hobby'] = array_filter(explode(',',$query['hobby']));
+        return $query;
+
     }
 
     public function actionView($id)
     {
 
-        $query = $this->findModels($id);
+        $query = $this->findModel($id);
 
         return $query;
 

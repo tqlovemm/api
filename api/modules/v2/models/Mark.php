@@ -22,14 +22,10 @@ class Mark extends ActiveRecord
         return '{{%user_mark}}';
     }
 
-    public function getId()
-    {
-        return $this->user_id;
-    }
-
     public function rules()
     {
         return [
+            ['id','integer'],
             [['mark_name','make_friend_name','hobby_name'], 'string'],
         ];
     }
@@ -52,11 +48,10 @@ class Mark extends ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id'=>'ID',
             'mark_name' => '标签名',
             'make_friend_name' => '交友要求',
             'hobby_name' => '兴趣爱好',
-
-
         ];
     }
 
