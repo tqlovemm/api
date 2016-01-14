@@ -10,13 +10,10 @@ use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Response;
 
-class ProfileController extends ActiveController
+class MarkController extends ActiveController
 {
-    public $modelClass = 'api\modules\v2\models\Profile';
-    public $serializer = [
-        'class' => 'yii\rest\Serializer',
-        'collectionEnvelope' => 'items',
-    ];
+    public $modelClass = 'api\modules\v2\models\Mark';
+
 
     public function behaviors()
     {
@@ -62,14 +59,14 @@ class ProfileController extends ActiveController
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
         if (!$model->save()) {
             return array_values($model->getFirstErrors())[0];
-        }*/
+        }
 
-        //Response::show('202','保存成功');
+        Response::show('202','保存成功');*/
     }
 
     public function actionUpdate($id)
     {
-        $model = $this->findModels($id);
+       /* $model = $this->findModels($id);
 
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
 
@@ -77,12 +74,12 @@ class ProfileController extends ActiveController
             return array_values($model->getFirstErrors())[0];
         }
 
-        Response::show(202,'更新成功');
+        Response::show(202,'更新成功');*/
     }
 
     public function actionDelete($id)
     {
-     /*   if($this->findModel($id)->delete()){
+       /* if($this->findModel($id)->delete()){
 
             Response::show('202','删除成功');
 

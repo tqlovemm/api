@@ -48,12 +48,26 @@ class Profile extends ActiveRecord
     // 返回的数据格式化
     public function fields()
     {
-        $fields = parent::fields();
+        //$fields = parent::fields();
 
         // remove fields that contain sensitive information
-        unset($fields['auth_key'], $fields['password_hash'], $fields['password_reset_token']);
+        //unset($fields['auth_key'], $fields['password_hash'], $fields['password_reset_token']);
 
-        return $fields;
+
+        return [
+
+            'user_id','birthdate','signature','address','description','height','weight',
+            'mark'=>function($model){
+                return json_decode($model->mark);
+            },
+            'make_friend'=>function($model){
+                return json_decode($model->make_friend);
+            },
+            'hobby'=>function($model){
+                return json_decode($model->hobby);
+            }
+
+        ];
     }
     public function getUser()
     {
