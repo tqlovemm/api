@@ -10,7 +10,7 @@ use app\components\db\ActiveRecord;
  *
  * @property integer $user_id
  * @property string $birthdate
- * @property string $signatrue
+ * @property string $signature
  * @property string $address
  * @property string $description
  * @property string $mark
@@ -18,6 +18,8 @@ use app\components\db\ActiveRecord;
  * @property string $hobby
  * @property integer $height
  * @property integer $weight
+ * @property integer $updated_at
+ * @property integer $created_at
  *
  */
 class Profile extends ActiveRecord
@@ -37,8 +39,8 @@ class Profile extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id','height','weight'], 'integer'],
-            [['address','mark','hobby','make_friend','signatrue','description'], 'string'],
+            [['user_id','height','weight','updated_at','created_at'], 'integer'],
+            [['address','mark','hobby','make_friend','signature','description'], 'string'],
             [['birthdate'],'string']
         ];
     }
@@ -72,7 +74,7 @@ class Profile extends ActiveRecord
         return [
             'user_id' => '用户ID',
             'birthdate' => '生日',
-            'signatrue' => '个人签名',
+            'signature' => '个人签名',
             'address' => '地址',
             'make_friend' => '交友要求',
             'description' => '自我介绍',
@@ -80,6 +82,8 @@ class Profile extends ActiveRecord
             'hobby' => '兴趣爱好',
             'height' => '身高',
             'weight' => '体重',
+            'created_at' => '体重',
+            'updated_at' => '体重',
 
         ];
     }
