@@ -2,6 +2,7 @@
 
 namespace api\modules\v2\controllers;
 
+use api\modules\v2\models\User;
 use Yii;
 use yii\rest\ActiveController;
 use yii\data\ActiveDataProvider;
@@ -84,16 +85,28 @@ class User1Controller extends ActiveController
     public function actionView($id)
     {
 
+
+
         $model = $this->findModel($id);
-        $model->avatar = 'http://182.254.217.147:8888/uploads/user/avatar/'.$model->avatar;
-        return $model;
+        $model['avatar'] = 'http://182.254.217.147:8888/uploads/user/avatar/'.$model['avatar'];
+        $data = Yii::$app->db->createCommand('select * from {{%user_data}} WHERE user_id='.$model['id'])->queryOne();
+        $profile = Yii::$app->db->createCommand('select * from {{%user_profile}} WHERE user_id='.$model['id'])->queryOne();
+
+        unset($model['password_hash'],$model['auth_key'],$model['password_reset_token'],$model['avatarid'],$model['avatartemp'],$model['id'],$model['role'],$model['identity']);
+
+        return $model+$data+$profile;
 
     }
-
     protected function findModel($id)
     {
         $modelClass = $this->modelClass;
-        if (($model = $modelClass::findOne($id)) !== null) {
+        if (is_numeric($id)) {
+            $model = $modelClass::findOne($id);
+        } else {
+            $model = $modelClass::find()->where(['username' => $id])->asArray()->one();
+        }
+
+        if ($model !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
