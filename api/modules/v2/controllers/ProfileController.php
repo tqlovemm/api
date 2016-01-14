@@ -22,7 +22,7 @@ class ProfileController extends ActiveController
     {
         $behaviors = parent::behaviors();
         // token 验证  请按需开启
-      /*   $behaviors['authenticator'] = [
+        /*$behaviors['authenticator'] = [
              'class' => CompositeAuth::className(),
              'authMethods' => [
                  QueryParamAuth::className(),
@@ -52,25 +52,24 @@ class ProfileController extends ActiveController
     {
 
         $query = $this->findModels($id);
-        return new ActiveDataProvider([
-            'query' => $query,
-        ]);
+       return $query;
 
     }
     public function actionCreate()
     {
-        $model = new $this->modelClass();
+      /*  $model = new $this->modelClass();
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
         if (!$model->save()) {
             return array_values($model->getFirstErrors())[0];
-        }
+        }*/
 
-        Response::show('202','保存成功');
+        //Response::show('202','保存成功');
     }
 
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModels($id);
+
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
 
         if (!$model->save()) {
@@ -82,11 +81,11 @@ class ProfileController extends ActiveController
 
     public function actionDelete($id)
     {
-        if($this->findModel($id)->delete()){
+     /*   if($this->findModel($id)->delete()){
 
             Response::show('202','删除成功');
 
-        }
+        }*/
     }
 
     protected function findModel($id)
@@ -101,15 +100,18 @@ class ProfileController extends ActiveController
 
 
     }
-    protected function findModels($user_id){
+    protected function findModels($id){
 
         $modelClass = $this->modelClass;
 
-        if (($model = $modelClass::find()->where('user_id=:user_id',[':user_id'=>$user_id])) !== null) {
+        if (($model = $modelClass::find()->where('user_id=:user_id',[':user_id'=>$id])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+
+
     }
 
 }
