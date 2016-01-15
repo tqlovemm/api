@@ -101,7 +101,6 @@ class User1Controller extends ActiveController
         $model = $this->findModel($id);
 
         if(!is_numeric($id)){
-            $model['avatar'] = 'http://182.254.217.147:8888/uploads/user/avatar/'.$model['avatar'];
             $data = Yii::$app->db->createCommand('select * from {{%user_data}} WHERE user_id='.$model['id'])->queryOne();
             $profile = Yii::$app->db->createCommand('select * from {{%user_profile}} WHERE user_id='.$model['id'])->queryOne();
             unset($model['password_hash'],$model['auth_key'],$model['password_reset_token'],$model['avatarid'],$model['avatartemp'],$model['id'],$model['role'],$model['identity']);

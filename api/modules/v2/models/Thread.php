@@ -42,10 +42,8 @@ class Thread extends ActiveRecord
         ];
     }
     public function getUser(){
-
-
         $user = Yii::$app->db->createCommand('select u.id as user_id,u.groupid,u.username,u.email,u.cellphone,u.sex,u.status,u.avatar,u.created_at,d.* from {{%user}} as u LEFT JOIN {{%user_data}} as d ON d.user_id=u.id WHERE id='.$this->user_id)->queryOne();
-        $user['avatar']='http://182.254.217.147:8888/uploads/user/avatar/'.$user['avatar'];
+
         return $user;
     }
     public function extraFields()
