@@ -66,14 +66,27 @@ class User1Controller extends ActiveController
 
     public function actionUpdate($id)
     {
-   /*   $model = $this->findModel($id);
+        $model = $this->findModel($id);
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+
+
+        $images = $model->avatar;
+        $pathStr = "uploads/user/avatar";
+        if ( !file_exists( $pathStr ) ) {
+            if ( !mkdir( $pathStr , 0777 , true ) ) {
+                return false;
+            }
+        }
+        $savePath = $pathStr.'/'.$id.'_'.time().rand(1,10000).'.jpg';
+        file_put_contents($savePath,base64_decode($images));
+        $abs_path = Yii::$app->request->getHostInfo().'/'.$savePath;
+
+        $model->avatar = $abs_path;
+
         if (!$model->save()) {
             return array_values($model->getFirstErrors())[0];
         }
-        return $model;*/
-
-        Response::show(401,'不允许的操作');
+        Response::show(202,'修改成功');
     }
 
     public function actionDelete($id)
