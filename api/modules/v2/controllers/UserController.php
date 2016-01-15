@@ -89,6 +89,9 @@ class UserController extends ActiveController
                                                         FROM {{%user}} as u LEFT JOIN {{%user_data}} as ud ON ud.user_id=u.id LEFT JOIN {{%user_profile}} as up ON up.user_id=u.id WHERE id='.$id);
         $post = $command->queryOne();
         $post['avatar']= 'http://182.254.217.147:8888/uploads/user/avatar/'.$post['avatar'];
+        $post['mark'] = json_decode($post['mark']);
+        $post['make_friend'] = json_decode($post['make_friend']);
+        $post['hobby'] = json_decode($post['hobby']);
         return $post;
 /*        $model = $this->findModel($id);
         $model->avatar = 'http://182.254.217.147:8888/uploads/user/avatar/'.$model->avatar;

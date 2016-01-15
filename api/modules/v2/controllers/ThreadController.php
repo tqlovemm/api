@@ -101,21 +101,15 @@ class ThreadController extends ActiveController
 
     public function actionDelete($id)
     {
-
         if($this->findModel($id)->delete()){
-
             Response::show('202','删除成功');
         }
-
     }
 
     public function actionView($id)
     {
-
         $model = $this->findModel($id);
-
         return $model;
-
     }
 
     protected function findModel($id)
