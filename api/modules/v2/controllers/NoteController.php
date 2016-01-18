@@ -11,12 +11,9 @@ class NoteController extends Controller
 
    public function actionView($id){
 
-
-
        $user_id = $_GET['user_id'];
 
        $query = Yii::$app->db->createCommand("select * from {{%user_notes}} WHERE thread_id=".$id." and note_by=".$user_id)->execute();
-
 
        if(empty($query)){
 

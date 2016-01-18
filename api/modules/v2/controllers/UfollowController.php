@@ -113,10 +113,24 @@ class UfollowController extends ActiveController
                                                         up.birthdate,up.signature,up.address,up.description as self_introduction,up.mark,up.make_friend,up.hobby,up.height,up.weight
                                                         FROM {{%user}} as u LEFT JOIN {{%user_data}} as ud ON ud.user_id=u.id LEFT JOIN {{%user_profile}} as up ON up.user_id=u.id WHERE id='.$uid);
                 $post = $command->queryOne();
+
+                $to = Yii::$app->db->createCommand('select * from {{%user_follow}} WHERE user_id='.$uid.' and people_id='.$id)->execute();
+                $from = Yii::$app->db->createCommand('select * from {{%user_follow}} WHERE user_id='.$id.' and people_id='.$uid)->execute();
+
                 $post['mark'] = json_decode($post['mark']);
                 $post['make_friend'] = json_decode($post['make_friend']);
                 $post['hobby'] = json_decode($post['hobby']);
+
+                if($to&&$from){
+
+                    $post['each']=1;
+                }else{
+
+                    $post['each']=0;
+                }
+
                 array_push($er,$post);
+
             }
         }
         if(!empty(count($following))){
@@ -129,10 +143,24 @@ class UfollowController extends ActiveController
                                                         up.birthdate,up.signature,up.address,up.description as self_introduction,up.mark,up.make_friend,up.hobby,up.height,up.weight
                                                         FROM {{%user}} as u LEFT JOIN {{%user_data}} as ud ON ud.user_id=u.id LEFT JOIN {{%user_profile}} as up ON up.user_id=u.id WHERE id='.$uid);
                 $post = $command->queryOne();
+
+
+                $to = Yii::$app->db->createCommand('select * from {{%user_follow}} WHERE user_id='.$uid.' and people_id='.$id)->execute();
+                $from = Yii::$app->db->createCommand('select * from {{%user_follow}} WHERE user_id='.$id.' and people_id='.$uid)->execute();
+
                 $post['mark'] = json_decode($post['mark']);
                 $post['make_friend'] = json_decode($post['make_friend']);
                 $post['hobby'] = json_decode($post['hobby']);
+                if($to&&$from){
+
+                    $post['each']=1;
+                }else{
+
+                    $post['each']=0;
+                }
+
                 array_push($ing,$post);
+
             }
         }
 
