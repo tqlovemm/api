@@ -60,7 +60,7 @@ class ThreadController extends ActiveController
         $images = explode(',',$images);
         for($i=0;$i<count($images);$i++){
 
-            $pathStr = "uploads/thread/".date("Ymd");
+            $pathStr = "uploads/umeditor/".date("Ymd");
             if ( !file_exists( $pathStr ) ) {
                 if ( !mkdir( $pathStr , 0777 , true ) ) {
                     return false;
