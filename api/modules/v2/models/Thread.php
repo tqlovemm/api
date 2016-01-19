@@ -42,7 +42,7 @@ class Thread extends ActiveRecord
         ];
     }
     public function getUser(){
-        $user = Yii::$app->db->createCommand('select u.id as user_id,u.groupid,u.username,u.email,u.cellphone,u.sex,u.status,u.avatar,u.created_at,d.* from {{%user}} as u LEFT JOIN {{%user_data}} as d ON d.user_id=u.id WHERE id='.$this->user_id)->queryOne();
+        $user = Yii::$app->db->createCommand('select u.id as user_id,u.groupid,u.username,u.email,u.cellphone,u.sex,u.status,u.avatar,u.created_at,d.*,p.birthdate from {{%user}} as u LEFT JOIN {{%user_data}} as d ON d.user_id=u.id LEFT JOIN {{%user_profile}} as p ON p.user_id=u.id WHERE id='.$this->user_id)->queryOne();
 
         return $user;
     }

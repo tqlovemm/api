@@ -15,10 +15,7 @@ use yii\helpers\Response;
 class ThreadController extends ActiveController
 {
     public $modelClass = 'api\modules\v2\models\Thread';
-    public $serializer = [
-        'class' => 'yii\rest\Serializer',
-        'collectionEnvelope' => 'items',
-    ];
+
 
     public function behaviors()
     {
@@ -44,7 +41,29 @@ class ThreadController extends ActiveController
     public function actionIndex()
     {
         $modelClass = $this->modelClass;
+        if(isset($_GET['max_id'])){
+
+            $max_id = $_GET['max_id'];
+            $latest = $modelClass::find()->where("id>{$max_id}");
+
+            return new ActiveDataProvider([
+                'query' => $latest,
+            ]);
+        }
+        if(isset($_GET['min_id'])){
+
+            $min_id = $_GET['min_id'];
+
+            $before = $modelClass::find()->where("id<{$min_id}");
+
+            return new ActiveDataProvider([
+                'query' => $before,
+            ]);
+
+        }
+
         $query = $modelClass::find();
+
 
         return new ActiveDataProvider([
             'query' => $query,
