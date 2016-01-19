@@ -44,7 +44,7 @@ class ThreadController extends ActiveController
         if(isset($_GET['max_id'])){
 
             $max_id = $_GET['max_id'];
-            $latest = $modelClass::find()->where("id>{$max_id}");
+            $latest = $modelClass::find()->where("id>{$max_id}")->orderBy('created_at desc');
 
             return new ActiveDataProvider([
                 'query' => $latest,
@@ -54,7 +54,7 @@ class ThreadController extends ActiveController
 
             $min_id = $_GET['min_id'];
 
-            $before = $modelClass::find()->where("id<{$min_id}");
+            $before = $modelClass::find()->where("id<{$min_id}")->orderBy('created_at desc');
 
             return new ActiveDataProvider([
                 'query' => $before,
@@ -62,7 +62,8 @@ class ThreadController extends ActiveController
 
         }
 
-        $query = $modelClass::find();
+
+        $query = $modelClass::find()->orderBy('created_at desc');
 
 
         return new ActiveDataProvider([
