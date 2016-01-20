@@ -71,7 +71,7 @@ class Profile extends ActiveRecord
     }
     public function getUser()
     {
-        $model = User::find()->select("id,username,groupid,sex,email,avatar,cellphone")->where('id=:uid',[':uid'=>$this->user_id])->orderBy('created_at DESC');
+        $model = User::find()->select("id,username,nickname,groupid,sex,email,avatar,cellphone")->where('id=:uid',[':uid'=>$this->user_id])->orderBy('created_at DESC');
 
         return $model;
     }

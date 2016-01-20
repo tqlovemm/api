@@ -74,7 +74,7 @@ class User extends ActiveRecord implements IdentityInterface,Linkable
         return [
             [['username','email'], 'required'],
             [['role', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'avatar', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
+            [['username', 'avatar', 'password_hash', 'password_reset_token', 'email','nickname'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32]
         ];
     }
