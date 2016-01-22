@@ -110,7 +110,7 @@ class UfollowController extends ActiveController
                 $uid = $follower[$i]['user_id'];
                 $command = Yii::$app->db->createCommand('SELECT u.id as user_id,u.groupid,u.username,u.nickname,u.email,u.cellphone,u.sex,u.status,u.avatar,u.created_at,
                                                         ud.post_count,ud.feed_count,ud.following_count,ud.follower_count,ud.thread_count,ud.empirical_value,ud.unread_message_count,
-                                                        up.birthdate,up.signature,up.address,up.description as self_introduction,up.mark,up.make_friend,up.hobby,up.height,up.weight
+                                                        up.birthdate,up.signature,up.address,up.description,up.mark,up.make_friend,up.hobby,up.height,up.weight
                                                         FROM {{%user}} as u LEFT JOIN {{%user_data}} as ud ON ud.user_id=u.id LEFT JOIN {{%user_profile}} as up ON up.user_id=u.id WHERE id='.$uid);
                 $post = $command->queryOne();
 
