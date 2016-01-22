@@ -98,6 +98,8 @@ class User1 extends ActiveRecord implements IdentityInterface,Linkable
            $model[$i]['image_path'] = json_decode($model[$i]['image_path']);
            $preg = "/<\/?[^>]+>/i";
            $model[$i]['content'] = trim(preg_replace($preg,'',$model[$i]['content']),'&nbsp;');
+           $time = (integer)$model[$i]['created_at'];
+           $model[$i]['created_at'] = $time;
 
        }
 
