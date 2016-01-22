@@ -56,7 +56,9 @@ class Profile extends ActiveRecord
 
         return [
 
-            'user_id','birthdate','signature','address','description','height','weight',
+            'user_id','birthdate','signature','address',
+            'self_introduction'=>'description','height','weight',
+
             'mark'=>function($model){
                 return json_decode($model->mark);
             },
