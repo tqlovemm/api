@@ -28,7 +28,7 @@ class FollowController extends Controller
         }else{
 
             Yii::$app->db->createCommand("insert into {{%user_follow}} (user_id,people_id) VALUES ({$id},{$user_id})")->execute();
-            Yii::$app->db->createCommand("UPDATE {{%user_data}} SET follower_count=follower_count+1 WHERE user_id=".$user_id)->execute();
+            Yii::$app->db->createCommand("UPDATE {{%user_data}} SET following_count=following_count+1 WHERE user_id=".$user_id)->execute();
             Response::show(202,'关注成功');
 
         }
