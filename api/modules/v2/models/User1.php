@@ -94,7 +94,7 @@ class User1 extends ActiveRecord implements IdentityInterface,Linkable
             $model = Yii::$app->db->createCommand("select t.id as thread_id,t.content,t.created_at,t.updated_at,t.post_count,t.note,t.read_count,t.is_stick,t.image_path from {{%forum_thread}} as t WHERE t.user_id=".$this->id." and id<".$min_id." order by created_at desc limit 5")->queryAll();
         }else{
 
-            $model = Yii::$app->db->createCommand("select t.id as thread_id,t.content,t.created_at,t.updated_at,t.post_count,t.note,t.read_count,t.is_stick,t.image_path from {{%forum_thread}} as t WHERE t.user_id=".$this->id." order by created_at desc")->queryAll();
+            $model = Yii::$app->db->createCommand("select t.id as thread_id,t.content,t.created_at,t.updated_at,t.post_count,t.note,t.read_count,t.is_stick,t.image_path from {{%forum_thread}} as t WHERE t.user_id=".$this->id." order by created_at desc limit 20")->queryAll();
         }
 
         for($i=0;$i<count($model);$i++){
