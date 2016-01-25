@@ -42,8 +42,18 @@ class Thread extends ActiveRecord
         ];
     }
     public function getUser(){
+
         $user = Yii::$app->db->createCommand('select u.id as user_id,u.groupid,u.username,u.nickname,u.email,u.cellphone,u.sex,u.status,u.avatar,u.created_at,d.*,p.birthdate from {{%user}} as u LEFT JOIN {{%user_data}} as d ON d.user_id=u.id LEFT JOIN {{%user_profile}} as p ON p.user_id=u.id WHERE id='.$this->user_id)->queryOne();
 
+        if(isset($_GET['uid'])){
+
+            $uid = $_GET['uid'];
+
+            $follow = Yii::$app->db->createCommand('select * from {{%user_follow}} WHERE user_id='.$uid.' and people_id='.$this->user_id)->queryOne();
+
+            $user['follow']=(integer)!empty($follow);
+            return $user;
+        }
         return $user;
     }
     public function extraFields()
