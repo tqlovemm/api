@@ -103,13 +103,21 @@ class User1Controller extends ActiveController
 
         if(!is_numeric($id)){
 
+            if(isset($_GET['uid'])){
+                $uid = $_GET['uid'];
+                $follow = Yii::$app->db->createCommand('select COUNT(*) as follow from {{%user_follow}} WHERE user_id='.$uid.' and people_id='.$model['id'])->queryOne();
+
+            }else{
+
+                $follow = array();
+            }
             $data = Yii::$app->db->createCommand('select * from {{%user_data}} WHERE user_id='.$model['id'])->queryOne();
             $profile = Yii::$app->db->createCommand('select *,description as self_introduction from {{%user_profile}} WHERE user_id='.$model['id'])->queryOne();
             unset($model['password_hash'],$profile['description'],$model['auth_key'],$model['password_reset_token'],$model['avatarid'],$model['avatartemp'],$model['id'],$model['role'],$model['identity']);
             $profile['mark']=json_decode($profile['mark']);
             $profile['make_friend']=json_decode($profile['make_friend']);
             $profile['hobby']=json_decode($profile['hobby']);
-            return $model+$data+$profile;
+            return $model+$data+$profile+$follow;
 
         }
 
