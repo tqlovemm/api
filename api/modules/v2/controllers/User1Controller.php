@@ -105,7 +105,14 @@ class User1Controller extends ActiveController
 
             if(isset($_GET['uid'])){
                 $uid = $_GET['uid'];
-                $follow = Yii::$app->db->createCommand('select COUNT(*) as follow from {{%user_follow}} WHERE user_id='.$uid.' and people_id='.$model['id'])->queryOne();
+                $follow = Yii::$app->db->createCommand('select * from {{%user_follow}} WHERE user_id='.$uid.' and people_id='.$model['id'])->queryOne();
+                if(!empty($follow)){
+                    $follow['follow'] = 1;
+                    unset($follow['id'],$follow['people_id']);
+                }else{
+
+                    $follow['follow'] = 0;
+                }
 
             }else{
 
