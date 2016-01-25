@@ -85,27 +85,29 @@ class User1 extends ActiveRecord implements IdentityInterface,Linkable
         $fields = parent::fields();
         // remove fields that contain sensitive information
         unset($fields['auth_key'],$fields['password_hash'], $fields['password_reset_token'],$fields['avatarid'],$fields['avatartemp'],$fields['role']);
-
         return $fields;
     }
 
     public function getThread(){
+        $min_id = isset($_GET['min_id'])?$_GET['min_id']:0;
+        if($min_id!=0){
+            $model = Yii::$app->db->createCommand("select t.id as thread_id,t.content,t.created_at,t.updated_at,t.post_count,t.note,t.read_count,t.is_stick,t.image_path from {{%forum_thread}} as t WHERE t.user_id=".$this->id." and id<".$min_id." order by created_at desc")->queryAll();
+        }else{
 
-       $model = Yii::$app->db->createCommand("select t.id as thread_id,t.content,t.created_at,t.updated_at,t.post_count,t.note,t.read_count,t.is_stick,t.image_path from {{%forum_thread}} as t WHERE t.user_id=".$this->id)->queryAll();
+            $model = Yii::$app->db->createCommand("select t.id as thread_id,t.content,t.created_at,t.updated_at,t.post_count,t.note,t.read_count,t.is_stick,t.image_path from {{%forum_thread}} as t WHERE t.user_id=".$this->id." order by created_at desc")->queryAll();
+        }
 
-       for($i=0;$i<count($model);$i++){
+        for($i=0;$i<count($model);$i++){
 
            $model[$i]['image_path'] = json_decode($model[$i]['image_path']);
            $preg = "/<\/?[^>]+>/i";
            $model[$i]['content'] = trim(preg_replace($preg,'',$model[$i]['content']),'&nbsp;');
            $time = (integer)$model[$i]['created_at'];
            $model[$i]['created_at'] = $time;
-
        }
-
         return $model;
-
     }
+
     public function extraFields()
     {
         return [
