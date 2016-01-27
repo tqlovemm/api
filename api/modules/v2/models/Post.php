@@ -34,6 +34,7 @@ class Post extends ActiveRecord
     {
         return [
             [['content','user_id','thread_id'], 'required'],
+            [['content'], 'string'],
             [['created_at','updated_at','user_id','thread_id'], 'integer'],
         ];
     }
@@ -48,14 +49,6 @@ class Post extends ActiveRecord
 
         return $fields;
 
-     /*   return [
-            'post_id'=>'id',
-            'content'=>'content',
-            'user_id'=>'user_id',
-            'thread_id'=>'thread_id',
-            'created_at'=>'created_at',
-            'updated_at'=>'updated_at',
-        ];*/
     }
     public function getUser()
     {
