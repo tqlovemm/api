@@ -65,12 +65,12 @@ class UserController extends ActiveController
 
     public function actionUpdate($id)
     {
-   /*   $model = $this->findModel($id);
+      $model = $this->findModel($id);
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
         if (!$model->save()) {
             return array_values($model->getFirstErrors())[0];
         }
-        return $model;*/
+        //return $model;
 
         Response::show(401,'不允许的操作');
     }
