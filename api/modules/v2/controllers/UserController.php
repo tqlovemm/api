@@ -72,7 +72,7 @@ class UserController extends ActiveController
         }
         //return $model;
 
-        Response::show(401,'不允许的操作');
+        Response::show(202,'修改成功');
     }
 
     public function actionDelete($id)
