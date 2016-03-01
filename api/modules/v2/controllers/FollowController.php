@@ -23,6 +23,7 @@ class FollowController extends Controller
 
             Yii::$app->db->createCommand("delete from {{%user_follow}} where user_id=".$id." and people_id=".$user_id)->execute();
             Yii::$app->db->createCommand("UPDATE {{%user_data}} SET following_count=following_count-1 WHERE user_id=".$id)->execute();
+            Yii::$app->db->createCommand("UPDATE {{%user_data}} SET following_count=following_count-1 WHERE user_id=".$user_id)->execute();
             Response::show(200,'取消关注');
 
         }else{
