@@ -53,8 +53,9 @@ class Post extends ActiveRecord
     public function getUser()
     {
         $model = User::find()->select("id,username,nickname,groupid,sex,email,avatar,cellphone")->where('id=:uid',[':uid'=>$this->user_id])->orderBy('created_at DESC');
-/*
-        $model = Yii::$app->db->createCommand('select u.id as user_id,u.groupid,u.username,u.nickname,u.email,u.cellphone,u.sex,u.status,u.avatar,u.created_at from {{%user}} as u WHERE id='.$this->user_id.' order by created_at desc')->queryAll();
+
+
+     /*   $model = Yii::$app->db->createCommand('select u.id as user_id,u.groupid,u.username,u.nickname,u.email,u.cellphone,u.sex,u.status,u.avatar,u.created_at from {{%user}} as u WHERE id='.$this->user_id.' order by created_at desc')->queryAll();
         for($i=0;$i<count($model);$i++){
 
             $model[$i]['user_id'] = (string)$model[$i]['user_id'];
@@ -74,6 +75,11 @@ class Post extends ActiveRecord
      * @inheritdoc
      */
     public function PostCuntPlus()
+    {
+        return Yii::$app->db->createCommand("UPDATE {{%forum_thread}} SET post_count=post_count+1 WHERE id=".$this->thread_id)->execute();
+    }
+
+    public function PostCuntDel()
     {
         return Yii::$app->db->createCommand("UPDATE {{%forum_thread}} SET post_count=post_count+1 WHERE id=".$this->thread_id)->execute();
     }
