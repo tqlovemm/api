@@ -86,12 +86,10 @@ class PostController extends ActiveController
     public function actionDelete($id)
     {
         $model = new $this->modelClass();
-        $model->load(Yii::$app->getRequest()->getBodyParams(), '');
-
+        $thread_id = $_GET['thread_id'];
         if($this->findModel($id)->delete()){
-
-            $model->PostCuntDel();
-           Response::show('202','删除成功');
+            $model->PostCuntDel($thread_id);
+            Response::show('202','删除成功');
 
         }
     }
