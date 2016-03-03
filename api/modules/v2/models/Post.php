@@ -67,11 +67,7 @@ class Post extends ActiveRecord
 
 
         $model = Yii::$app->db->createCommand('select u.id as user_id,u.groupid,u.username,u.nickname,u.email,u.cellphone,u.sex,u.status,u.avatar,u.created_at from {{%user}} as u WHERE id='.$this->user_id.' order by created_at desc')->queryAll();
-        for($i=0;$i<count($model);$i++){
 
-            $model[$i]['user_id'] = (string)$model[$i]['user_id'];
-
-        }
         return $model;
     }
 
