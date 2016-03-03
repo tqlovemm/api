@@ -38,7 +38,18 @@ class Post extends ActiveRecord
             [['created_at','updated_at','user_id','thread_id'], 'integer'],
         ];
     }
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'content' => '内容',
+            'user_id' => '用户ID',
+            'thread_id' => '帖子ID',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
 
+        ];
+    }
     // 返回的数据格式化
     public function fields()
     {
@@ -84,17 +95,6 @@ class Post extends ActiveRecord
         return Yii::$app->db->createCommand("UPDATE {{%forum_thread}} SET post_count=post_count-1 WHERE id=".$this->thread_id)->execute();
     }
 
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'content' => '内容',
-            'user_id' => '用户ID',
-            'thread_id' => '帖子ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
 
-        ];
-    }
 
 }
