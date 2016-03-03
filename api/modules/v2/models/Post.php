@@ -81,7 +81,7 @@ class Post extends ActiveRecord
 
     public function PostCuntDel()
     {
-        return Yii::$app->db->createCommand("UPDATE {{%forum_thread}} SET post_count=post_count+1 WHERE id=".$this->thread_id)->execute();
+        return Yii::$app->db->createCommand("UPDATE {{%forum_thread}} SET post_count=post_count-1 WHERE id=".$this->thread_id)->execute();
     }
 
     public function attributeLabels()
