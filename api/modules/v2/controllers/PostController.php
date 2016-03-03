@@ -85,7 +85,8 @@ class PostController extends ActiveController
 
     public function actionDelete($id)
     {
-        $model = new Post();
+        $model = new $this->modelClass();
+        $model->load(Yii::$app->getRequest()->getBodyParams(), '');
 
         if($this->findModel($id)->delete()){
 
