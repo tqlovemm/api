@@ -86,6 +86,7 @@ class PostController extends ActiveController
     public function actionDelete($id)
     {
         $model = new $this->modelClass();
+
         if($this->findModel($id)->delete()){
             $model->PostCuntDel();
            Response::show('202','删除成功');
