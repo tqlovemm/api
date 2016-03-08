@@ -44,6 +44,7 @@ class Thread extends ActiveRecord
     public function getUser(){
 
         $user = Yii::$app->db->createCommand('select u.id as user_id,u.groupid,u.username,u.nickname,u.email,u.cellphone,u.sex,u.status,u.avatar,u.created_at,d.*,p.* from {{%user}} as u LEFT JOIN {{%user_data}} as d ON d.user_id=u.id LEFT JOIN {{%user_profile}} as p ON p.user_id=u.id WHERE id='.$this->user_id)->queryOne();
+        $user['mark']=json_decode($user['mark']);$user['make_friend']=json_decode($user['make_friend']);$user['hobby']=json_decode($user['hobby']);
 
         if(isset($_GET['uid'])){
 
