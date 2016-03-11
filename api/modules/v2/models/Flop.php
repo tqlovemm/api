@@ -48,7 +48,10 @@ class Flop extends ActiveRecord
         // remove fields that contain sensitive information
         unset($fields['cover_id'], $fields['created_by']);
 
-        return $fields;
+        return [
+
+            'flop_id'=>'id','area','content','created_at','status',
+        ];
 
     }
 
@@ -61,7 +64,6 @@ class Flop extends ActiveRecord
             'id' => 'ID',
             'content' => '简介',
             'area' => '地区',
-            'note' => '点赞数',
             'created_by' => '创建人',
             'status' => '状态',
             'created_at' => 'Created At',
