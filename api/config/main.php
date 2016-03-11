@@ -38,6 +38,7 @@ return [
                     'class' => 'yii\rest\UrlRule', 
                     'controller' => [
                       'v2/thread','v2/user','v2/user1','v2/post','v2/profile','v2/data','v2/mark','v2/ufollow','v2/note','v2/follow','v2/claims-thread',
+                        'v2/flop','v2/flop-content','v2/flop-content-data',
                     ],
                     'tokens' => [
                         '{id}' => '<id:\\w+>',
