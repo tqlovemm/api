@@ -43,10 +43,10 @@ class Flop extends ActiveRecord
     // 返回的数据格式化
     public function fields()
     {
-        $fields = parent::fields();
+        //$fields = parent::fields();
 
         // remove fields that contain sensitive information
-        unset($fields['cover_id'], $fields['created_by']);
+        //unset($fields['cover_id'], $fields['created_by']);
 
         return [
 
