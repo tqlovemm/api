@@ -12,7 +12,9 @@ use yii\helpers\Response;
 
 class FlopContentDataController extends ActiveController
 {
+    public $enableCsrfValidation = false;
     public $modelClass = 'api\modules\v2\models\FlopContentData';
+
 
 
     public function behaviors()
@@ -38,21 +40,30 @@ class FlopContentDataController extends ActiveController
 
     public function actionIndex()
     {
+        $modelClass = $this->modelClass;
+
         if(isset($_GET['user_id'])){
 
             $user_id = $_GET['user_id'];
+            $query = $modelClass::find()->where(['user_id'=>$user_id])->orderBy('created_at desc');
+
+            return new ActiveDataProvider([
+                'query' => $query,
+            ]);
+
+        }elseif(isset($_GET['flag'])){
+
+            $flag = $_GET['flag'];
+            $query = $modelClass::find()->where(['flag'=>$flag])->orderBy('created_at desc');
+            return new ActiveDataProvider([
+                'query' => $query,
+            ]);
 
         }else{
 
             return false;
         }
-        $modelClass = $this->modelClass;
 
-        $query = $modelClass::find()->where(['user_id'=>$user_id])->orderBy('created_at desc');
-
-        return new ActiveDataProvider([
-            'query' => $query,
-        ]);
     }
 
     public function actionCreate()
@@ -74,8 +85,6 @@ class FlopContentDataController extends ActiveController
         $model = $this->findModel($id);
 
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
-
-
 
         if (!$model->save()) {
 
@@ -103,7 +112,7 @@ class FlopContentDataController extends ActiveController
     protected function findModel($id)
     {
         $modelClass = $this->modelClass;
-        if (($model = $modelClass::findOne($id)) !== null) {
+        if (($model = $modelClass::findOne(['flag'=>$id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

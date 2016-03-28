@@ -25,6 +25,11 @@ class FlopContentData extends ActiveRecord
         return '{{%flop_content_data}}';
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function rules()
     {
         return [
