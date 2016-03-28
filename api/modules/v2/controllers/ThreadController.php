@@ -2,15 +2,13 @@
 
 namespace api\modules\v2\controllers;
 
-use api\modules\v2\models\Data;
-use api\modules\v2\models\User;
+
 use Yii;
-use yii\filters\auth\CompositeAuth;
-use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Response;
+
 
 class ThreadController extends ActiveController
 {
@@ -73,6 +71,7 @@ class ThreadController extends ActiveController
 
     public function actionCreate()
     {
+
         $model = new $this->modelClass();
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
         $images = $model->image_path;
@@ -94,8 +93,6 @@ class ThreadController extends ActiveController
 
         }
         $model->image_path = json_encode($Mpath);
-
-
 
         if (!$model->save()) {
             return array_values($model->getFirstErrors())[0];

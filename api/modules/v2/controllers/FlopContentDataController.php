@@ -12,10 +12,8 @@ use yii\helpers\Response;
 
 class FlopContentDataController extends ActiveController
 {
-    public $enableCsrfValidation = false;
+
     public $modelClass = 'api\modules\v2\models\FlopContentData';
-
-
 
     public function behaviors()
     {
@@ -35,6 +33,7 @@ class FlopContentDataController extends ActiveController
         $actions = parent::actions();
         // 注销系统自带的实现方法
         unset($actions['index'], $actions['update'], $actions['create'], $actions['delete'], $actions['view']);
+
         return $actions;
     }
 

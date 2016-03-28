@@ -69,7 +69,6 @@ class User1Controller extends ActiveController
         $model = $this->findModel($id);
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
 
-
         $images = $model->avatar;
         $pathStr = "uploads/user/avatar";
         if ( !file_exists( $pathStr ) ) {
