@@ -37,7 +37,6 @@ class FlopContent extends ActiveRecord
     public function rules()
     {
         return [
-            [['like_count','nope_count'], 'required'],
             [['created_at','sex', 'updated_at','like_count','nope_count','weight','height','flop_id'], 'integer'],
             [['number','path','path','area' ], 'string'],
         ];

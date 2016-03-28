@@ -29,8 +29,7 @@ class FlopContentData extends ActiveRecord
     {
         return [
 
-            [['user_id','content','priority'],'required'],
-            [['created_at', 'updated_at','user_id'], 'integer'],
+            [['created_at', 'updated_at','user_id','flag'], 'integer'],
             [['content', 'priority'], 'string'],
         ];
     }
@@ -52,6 +51,7 @@ class FlopContentData extends ActiveRecord
             'id' => 'ID',
             'content' => '内容',
             'priority' => '翻牌',
+            'flag' => '标识',
             'user_id' => '用户ID',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
