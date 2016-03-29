@@ -43,25 +43,16 @@ class FlopContentDataController extends ActiveController
 
         if(isset($_GET['user_id'])){
 
-            $user_id = $_GET['user_id'];
-            $query = $modelClass::find()->where(['user_id'=>$user_id])->orderBy('created_at desc');
-
-            return new ActiveDataProvider([
-                'query' => $query,
-            ]);
-
-        }elseif(isset($_GET['flag'])){
-
-            $flag = $_GET['flag'];
-            $query = $modelClass::find()->where(['flag'=>$flag])->orderBy('created_at desc');
-            return new ActiveDataProvider([
-                'query' => $query,
-            ]);
+            $query = $modelClass::find()->where(['user_id'=>$_GET['user_id']])->orderBy('created_at desc');
 
         }else{
 
             return false;
         }
+
+        return new ActiveDataProvider([
+            'query' => $query,
+        ]);
 
     }
 
