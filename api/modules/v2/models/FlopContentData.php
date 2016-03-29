@@ -46,6 +46,7 @@ class FlopContentData extends ActiveRecord
         $fields["flop_content_data_id"] = $fields['id'];
         // remove fields that contain sensitive information
 
+        unset($fields['id']);
         return $fields;
 
     }
