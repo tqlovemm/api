@@ -33,8 +33,19 @@ class DatingController extends ActiveController
 
     public function actionIndex()
     {
+
         $modelClass = $this->modelClass;
-        $query = $modelClass::find()->where(['status'=>2]);
+
+        if(isset($_GET['title'])){
+
+            $query = $modelClass::find()->where(['status'=>2])->andwhere(['title'=>$_GET['title']])->orderBy('created_at desc');
+
+        }else{
+
+            $query = $modelClass::find()->where(['status'=>2])->orderBy('created_at desc');
+
+        }
+
         return new ActiveDataProvider([
             'query' => $query,
         ]);

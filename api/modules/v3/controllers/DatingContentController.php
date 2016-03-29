@@ -41,7 +41,7 @@ class DatingContentController extends ActiveController
 
         }else{
 
-            $query = $modelClass::find()->orderBy("created_at desc");
+            return false;
 
         }
 
