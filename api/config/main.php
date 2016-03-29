@@ -14,6 +14,10 @@ return [
             'basePath' => '@app/modules/v2',
             'class' => 'api\modules\v2\Module'
         ],
+        'v3' => [
+            'basePath' => '@app/modules/v3',
+            'class' => 'api\modules\v3\Module'
+        ],
     ],
     'components' => [        
         'user' => [
@@ -39,6 +43,16 @@ return [
                     'controller' => [
                       'v2/thread','v2/user','v2/user1','v2/post','v2/profile','v2/data','v2/mark','v2/ufollow','v2/note','v2/follow','v2/claims-thread',
                         'v2/flop','v2/flop-content','v2/flop-content-data',
+                    ],
+                    'tokens' => [
+                        '{id}' => '<id:\\w+>',
+
+                    ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => [
+                      'v3/dating','v3/dating-content','v3/dating-comment',
                     ],
                     'tokens' => [
                         '{id}' => '<id:\\w+>',
