@@ -4,6 +4,7 @@ namespace api\modules\v2\controllers;
 
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\rest\ActiveController;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
@@ -38,10 +39,25 @@ class FlopContentController extends ActiveController
 
     public function actionIndex()
     {
+
         $area = $_GET['area'];
+
         $modelClass = $this->modelClass;
 
-        $query = $modelClass::find()->where(['area'=>$area]);
+        $model = Yii::$app->db->createCommand("select priority from {{%flop_content_data}}")->queryAll();
+
+        $exist = array_filter(explode(',',implode(',',array_filter(ArrayHelper::map($model,'priority','priority')))));
+
+        $count = count($modelClass::find()->all());
+
+        if($count>25){
+
+            $query = $modelClass::find()->where(['area'=>$area])->andWhere(['not in','id',$exist]);
+
+        }else{
+
+            $query = $modelClass::find()->where(['area'=>$area]);
+        }
 
         return new ActiveDataProvider([
             'query' => $query,
@@ -50,9 +66,7 @@ class FlopContentController extends ActiveController
 
     public function actionCreate()
     {
-
         Response::show(401,'不允许的操作');
-
     }
 
     public function actionUpdate($id)
