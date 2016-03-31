@@ -161,6 +161,23 @@ class FlopContentDataController extends ActiveController
     public function actionView($id)
     {
         $model = $this->findModel($id);
+
+        $content = explode(',',$model->content);$priority = explode(',',$model->priority);
+
+        $contents = array();$priorities = array();
+
+        foreach($content as $item){
+            $photo = Yii::$app->db->createCommand("select path from {{%flop_content}} WHERE id=$item")->queryOne();
+            array_push($contents,$photo);
+        }
+
+        foreach($priority as $item){
+            $photo = Yii::$app->db->createCommand("select path from {{%flop_content}} WHERE id=$item")->queryOne();
+            array_push($priorities,$photo);
+        }
+
+        $model->content = $contents;$model->priority = $priorities;
+
         return $model;
     }
 
