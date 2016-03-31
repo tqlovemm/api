@@ -13,12 +13,13 @@ use Yii;
  * @property string $content
  * @property string $priority
  * @property integer $user_id
- * @property integer $flag
+ * @property string $flag
  * @property integer $created_at
  * @property integer $updated_at
  */
 class FlopContentData extends ActiveRecord
 {
+    public $append;
 
     public static function tableName()
     {
@@ -34,8 +35,9 @@ class FlopContentData extends ActiveRecord
     {
         return [
 
-            [['created_at', 'updated_at','user_id','flag'], 'integer'],
-            [['content', 'priority'], 'string'],
+            ['append','required'],
+            [['created_at', 'updated_at','user_id'], 'integer'],
+            [['content', 'priority','flag'], 'string'],
         ];
     }
 

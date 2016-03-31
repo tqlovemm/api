@@ -72,15 +72,65 @@ class FlopContentDataController extends ActiveController
 
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
 
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
 
-        if (!$model->save()) {
+        $appends = ",".$model->append;
 
-            return array_values($model->getFirstErrors())[0];
+        $query = Yii::$app->db->createCommand("select * from {{%flop_content_data}} where flag=$id")->queryOne();
+
+        $content = explode(',',$query['content']);
+        $priority = explode(',',$query['priority']);
+
+
+        if(isset($_GET['type'])&&$_GET['type']==1){
+
+            if(!in_array($model->append,$content)) {
+
+                Yii::$app->db->createCommand("update {{%flop_content_data}} set content=concat(content,'$appends'),priority=concat(priority,'$appends') where flag=$id")->execute();
+                Yii::$app->db->createCommand("update {{%flop_content}} set like_count=like_count+1 where id=$model->append")->execute();
+                Response::show('202','加入成功');
+            }
+
+        }elseif((isset($_GET['type'])&&$_GET['type']==0)){
+
+
+            if(in_array($model->append,$content)){
+
+                $content= array_filter(array_unique($content));
+
+                unset($content[array_search($model->append,$content)]);
+
+                $content = implode(',',$content);
+
+                Yii::$app->db->createCommand("update {{%flop_content_data}} set content='$content',priority='$content' where flag=$id")->execute();
+
+                Response::show('202','删除成功');
+
+            }
+        }elseif((isset($_GET['type'])&&$_GET['type']==2)){
+
+            if(in_array($model->append,$priority)){
+
+                $priority= array_filter(array_unique($priority));
+
+                unset($priority[array_search($model->append,$priority)]);
+
+                $priority = implode(',',$priority);
+
+                Yii::$app->db->createCommand("update {{%flop_content_data}} set priority='$priority' where flag=$id")->execute();
+
+                Response::show('202','删除成功');
+
+            }
 
         }
+
+        /* if (!$model->save()) {
+            return array_values($model->getFirstErrors())[0];
+        }*/
 
         return $model;
 
