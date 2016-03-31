@@ -162,7 +162,7 @@ class FlopContentDataController extends ActiveController
     {
         $model = $this->findModel($id);
 
-        $content = explode(',',$model->content);$priority = explode(',',$model->priority);
+        $content = array_filter(explode(',',$model->content));$priority = array_filter(explode(',',$model->priority));
 
         $contents = array();$priorities = array();
 
