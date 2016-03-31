@@ -56,6 +56,19 @@ class Dating extends ActiveRecord
 
         ];
     }
+
+    public function getPhotos(){
+
+        $photo = Yii::$app->db->createCommand("select path from {{%weekly_content}} where album_id=$this->id")->queryAll();
+
+        return $photo;
+    }
+    public function extraFields()
+    {
+        return [
+            'photos'=>'photos',
+        ];
+    }
     // 返回的数据格式化
     public function fields()
     {
@@ -81,7 +94,6 @@ class Dating extends ActiveRecord
         ];
 
     }
-
 
 
 
