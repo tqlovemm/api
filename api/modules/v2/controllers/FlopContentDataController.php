@@ -126,6 +126,10 @@ class FlopContentDataController extends ActiveController
 
             }
 
+        }else{
+
+
+            Response::show('402','参数错误');
         }
 
         /* if (!$model->save()) {
