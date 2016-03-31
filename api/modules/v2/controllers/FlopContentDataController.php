@@ -84,7 +84,6 @@ class FlopContentDataController extends ActiveController
         $content = explode(',',$query['content']);
         $priority = explode(',',$query['priority']);
 
-
         if(isset($_GET['type'])&&$_GET['type']==1){
 
             if(!in_array($model->append,$content)) {
@@ -105,11 +104,23 @@ class FlopContentDataController extends ActiveController
 
                 $content = implode(',',$content);
 
-                Yii::$app->db->createCommand("update {{%flop_content_data}} set content='$content',priority='$content' where flag=$id")->execute();
-
-                Response::show('202','删除成功');
+                Yii::$app->db->createCommand("update {{%flop_content_data}} set content='$content' where flag=$id")->execute();
 
             }
+
+            if(in_array($model->append,$priority)){
+
+                $priority= array_filter(array_unique($priority));
+
+                unset($priority[array_search($model->append,$priority)]);
+
+                $priority = implode(',',$priority);
+
+                Yii::$app->db->createCommand("update {{%flop_content_data}} set priority='$priority' where flag=$id")->execute();
+            }
+
+            Response::show('202','删除成功');
+
         }elseif((isset($_GET['type'])&&$_GET['type']==2)){
 
             if(in_array($model->append,$priority)){
