@@ -35,7 +35,6 @@ class FlopContentData extends ActiveRecord
     {
         return [
 
-            ['append','required'],
             [['created_at', 'updated_at','user_id'], 'integer'],
             [['content', 'priority','flag'], 'string'],
         ];
