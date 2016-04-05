@@ -2,14 +2,14 @@
 
 namespace api\modules\v3\models;
 
-use app\components\db\ActiveRecord;
 use Yii;
+use app\components\db\ActiveRecord;
 
 
 /**
  * This is the model class for table "pre_weekly_comment".
  *
- * @property integer $id
+ * @property integer $id;
  * @property integer $weekly_id
  * @property integer $user_id
  * @property string $content
@@ -17,38 +17,34 @@ use Yii;
  * @property integer $likes
  * @property integer $updated_at
  * @property integer $created_at
- * @property integer $first_comment
  */
 class DatingComment extends ActiveRecord
 {
+
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public static function tableName()
     {
         return '{{%weekly_comment}}';
     }
 
+
     public function rules()
     {
         return [
 
-            [['content'], 'string'],
-            [['created_at','updated_at','status','weekly_id','likes','user_id'], 'integer'],
+            [['user_id','weekly_id','content'],'required'],
+            ['content', 'string'],
+            [['id','created_at','updated_at','status','weekly_id','likes','user_id'], 'integer'],
+            [['weekly_id','content','user_id'],'safe']
         ];
     }
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'content' => '内容',
-            'weekly_id' => '相册ID',
-            'likes' => '点赞',
-            'user_id' => '会员ID',
-            'updated_at' => 'Updated At',
-            'created_at' => 'Updated At',
-            'status' => '状态',
 
-        ];
-    }
+
 
     public function getUser(){
 
@@ -76,17 +72,32 @@ class DatingComment extends ActiveRecord
             'user'=>'user',
         ];
     }
-
-
     // 返回的数据格式化
     public function fields()
     {
         $fields = parent::fields();
         $fields["comment_id"] = $fields['id'];
-    //  remove fields that contain sensitive information
+        //  remove fields that contain sensitive information
         unset($fields['id']);
         return $fields;
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'content' => '内容',
+            'weekly_id' => '相册ID',
+            'likes' => '点赞',
+            'user_id' => 'USER ID',
+            'updated_at' => 'Updated At',
+            'created_at' => 'Updated At',
+            'status' => '状态',
+
+        ];
+    }
+
+
 
 
 }
