@@ -40,8 +40,6 @@ class FlopContentController extends ActiveController
     public function actionIndex()
     {
 
-        $area = $_GET['area'];
-
         $modelClass = $this->modelClass;
 
         $model = Yii::$app->db->createCommand("select priority from {{%flop_content_data}}")->queryAll();
@@ -50,14 +48,26 @@ class FlopContentController extends ActiveController
 
         $count = count($modelClass::find()->all());
 
-        if($count>25){
+        /*按区域选择*/
+        if(isset($_GET['area'])){
 
-            $query = $modelClass::find()->where(['area'=>$area])->andWhere(['not in','id',$exist]);
+            if($count>25){
 
-        }else{
+                $query = $modelClass::find()->where(['area'=>$_GET['area']])->andWhere(['not in','id',$exist]);
 
-            $query = $modelClass::find()->where(['area'=>$area]);
+            }else{
+
+                $query = $modelClass::find()->where(['area'=>$_GET['area']]);
+            }
+
+        }elseif(isset($_GET['culling'])&&$_GET['culling']==1){
+
+            /*精选*/
+
+            $query = $modelClass::find()->where(['flop_id'=>49])->andWhere(['not in','id',$exist])->orWhere(['>','like_count',10])->andWhere(['not in','id',$exist]);
+
         }
+
 
         return new ActiveDataProvider([
             'query' => $query,
