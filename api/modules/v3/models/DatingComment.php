@@ -31,7 +31,6 @@ class DatingComment extends ActiveRecord
     {
         return [
 
-            [['user_id'],'required'],
             [['content'], 'string'],
             [['created_at','updated_at','status','weekly_id','likes','user_id'], 'integer'],
         ];
