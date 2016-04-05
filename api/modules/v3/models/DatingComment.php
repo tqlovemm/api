@@ -12,7 +12,7 @@ use app\components\db\ActiveRecord;
  * @property integer $id;
  * @property integer $weekly_id
  * @property integer $user_id
- * @property string $content
+ * @property string  $content
  * @property integer $status
  * @property integer $likes
  * @property integer $updated_at
