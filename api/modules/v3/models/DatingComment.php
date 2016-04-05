@@ -50,6 +50,35 @@ class DatingComment extends ActiveRecord
 
         ];
     }
+
+    public function getUser(){
+
+        $user = Yii::$app->db->createCommand('select username,nickname,avatar from {{%user}} where id ='.$this->user_id)->queryOne();
+
+        if($user['username']==''){
+
+            $user['nickname']='游客';
+            $user['avatar']='http://13loveme.com/uploads/user/avatar/default/'.rand(1,30).'.jpg';
+
+        }else{
+
+            if($user['nickname']==''){
+
+                $user['nickname']=$user['username'];
+            }
+        }
+
+        unset($user['username']);
+        return $user;
+    }
+    public function extraFields()
+    {
+        return [
+            'user'=>'user',
+        ];
+    }
+
+
     // 返回的数据格式化
     public function fields()
     {
