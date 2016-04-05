@@ -42,13 +42,14 @@ class FlopContentController extends ActiveController
     {
 
         $modelClass = $this->modelClass;
-        $exist = FlopContentData::find()->select('content')->where(['>','created_at',time()-86400*5])->asArray()->all();
+        $exist = FlopContentData::find()->select('priority')->where(['>','created_at',time()-86400*5])->asArray()->all();
         //$model = Yii::$app->db->createCommand("select priority from {{%flop_content_data}} where ")->queryAll();
 
         $exists = array_filter(explode(',',implode(',',array_filter(ArrayHelper::map($exist,'priority','priority')))));
 
         //$exists = array_unique(array_filter(explode(',',implode(',',ArrayHelper::map($exist,'priority','priority')))));
         $count = count($modelClass::find()->all());
+
 
         /*按区域选择*/
         if(isset($_GET['area'])){
@@ -62,10 +63,12 @@ class FlopContentController extends ActiveController
                 $query = $modelClass::find()->where(['area'=>$_GET['area']]);
             }
 
-        }elseif(isset($_GET['culling'])&&$_GET['culling']==1){
+        }
+
+        if(isset($_GET['culling'])&&$_GET['culling']==1){
 
             /*精选*/
-            $query = $modelClass::find()->where(['flop_id'=>49])->andWhere(['not in','id',$exists])->orWhere(['>','like_count',10])->andWhere(['not in','id',$exist]);
+            $query = $modelClass::find()->where(['flop_id'=>49])->andWhere(['not in','id',$exists])->orWhere(['>','like_count',10])->andWhere(['not in','id',$exists]);
 
         }
 
