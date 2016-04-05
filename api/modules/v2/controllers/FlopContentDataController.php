@@ -168,12 +168,12 @@ class FlopContentDataController extends ActiveController
         $contents = array();$priorities = array();
 
         foreach($content as $item){
-            $photo = Yii::$app->db->createCommand("select id,path from {{%flop_content}} WHERE id=$item")->queryOne();
+            $photo = Yii::$app->db->createCommand("select id as flop_content_id,path from {{%flop_content}} WHERE id=$item")->queryOne();
             array_push($contents,$photo);
         }
 
         foreach($priority as $item){
-            $photo = Yii::$app->db->createCommand("select id,path from {{%flop_content}} WHERE id=$item")->queryOne();
+            $photo = Yii::$app->db->createCommand("select id as flop_content_id,path from {{%flop_content}} WHERE id=$item")->queryOne();
             array_push($priorities,$photo);
         }
 
