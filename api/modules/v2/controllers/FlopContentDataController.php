@@ -136,6 +136,11 @@ class FlopContentDataController extends ActiveController
 
                 Response::show('202','删除成功');
 
+            }else{
+
+                Yii::$app->db->createCommand("update {{%flop_content_data}} set priority=concat(priority,'$appends') where flag=$id")->execute();
+
+                Response::show('202','添加翻牌成功');
             }
 
         }else{
