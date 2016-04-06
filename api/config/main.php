@@ -52,7 +52,7 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
-                      'v3/dating','v3/dating-content','v3/dating-comment',
+                      'v3/dating','v3/dating-content','v3/dating-comment','v3/date','v3/version',
                     ],
                     'tokens' => [
                         '{id}' => '<id:\\w+>',
