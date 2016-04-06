@@ -47,9 +47,7 @@ class VersionController extends ActiveController
     {
         $query = $this->findModel($id);
 
-        return new ActiveDataProvider([
-            'query' => $query,
-        ]);
+        return $query;
 
     }
     public function actionCreate()
@@ -93,7 +91,7 @@ class VersionController extends ActiveController
     {
         $modelClass = $this->modelClass;
 
-            if (($model = $modelClass::findOne($id)) !== null) {
+            if (($model = $modelClass::findOne(['platform'=>$id])) !== null) {
                 return $model;
             } else {
                 throw new NotFoundHttpException('The requested page does not exist.');
