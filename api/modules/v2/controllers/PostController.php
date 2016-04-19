@@ -67,8 +67,6 @@ class PostController extends ActiveController
             return array_values($model->getFirstErrors())[0];
         }
 
-
-
         $model->PostCuntPlus();
         Response::show('202','保存成功');
     }
