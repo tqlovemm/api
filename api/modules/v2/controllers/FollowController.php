@@ -31,6 +31,16 @@ class FollowController extends Controller
             Yii::$app->db->createCommand("insert into {{%user_follow}} (user_id,people_id) VALUES ({$id},{$user_id})")->execute();
             Yii::$app->db->createCommand("UPDATE {{%user_data}} SET following_count=following_count+1 WHERE user_id=".$id)->execute();
             Yii::$app->db->createCommand("UPDATE {{%user_data}} SET follower_count=follower_count+1 WHERE user_id=".$user_id)->execute();
+            $cid = Yii::$app->db->createCommand('select cid from {{%user}} where id='.$user_id)->queryOne();
+
+            if(!empty($cid['cid'])){
+                $title = "有人关注您为好友";
+                $msg = "有人关注您为好友";
+                $extras = json_encode(array('push_title'=>$title,'push_content'=>$msg,'push_type'=>'SSCOMM_FANS'));
+                Yii::$app->db->createCommand("insert into {{%app_push}} (status,cid,title,msg,extras,platform,response) values(2,'$cid[cid]','$title','$msg','$extras','all','NULL')")->execute();
+
+            }
+
             Response::show(202,'关注成功');
 
         }

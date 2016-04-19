@@ -2,13 +2,11 @@
 
 namespace api\modules\v2\controllers;
 
-
 use Yii;
 use yii\rest\ActiveController;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Response;
-
 
 class ThreadController extends ActiveController
 {
@@ -72,8 +70,11 @@ class ThreadController extends ActiveController
     public function actionCreate()
     {
 
+
         $model = new $this->modelClass();
+
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+
         $images = $model->image_path;
         $Mpath = array();
         $images = explode(',',$images);

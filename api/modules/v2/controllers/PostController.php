@@ -67,6 +67,17 @@ class PostController extends ActiveController
             return array_values($model->getFirstErrors())[0];
         }
 
+        $user_id = Yii::$app->db->createCommand('select user_id from {{%forum_thread}} where id='.$model->thread_id)->queryOne();
+        $cid = Yii::$app->db->createCommand('select cid from {{%user}} where id='.$user_id['user_id'])->queryOne();
+
+        if(!empty($cid['cid'])){
+
+            $title = "有人评价了您的帖子";
+            $msg = "有人评价了您的帖子";
+            $extras = json_encode(array('push_title'=>$title,'push_content'=>$msg,'push_post_id'=>$model->thread_id,'push_type'=>'SSCOMM_FANS'));
+            Yii::$app->db->createCommand("insert into {{%app_push}} (status,cid,title,msg,extras,platform,response) values(2,'$cid[cid]','$title','$msg','$extras','all','NULL')")->execute();
+        }
+
         $model->PostCuntPlus();
         Response::show('202','保存成功');
     }
