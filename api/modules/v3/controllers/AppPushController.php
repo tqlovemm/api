@@ -4,7 +4,6 @@ namespace api\modules\v3\controllers;
 
 use Yii;
 use yii\rest\ActiveController;
-use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Response;
 
@@ -34,10 +33,11 @@ class AppPushController extends ActiveController
 
     public function actionView($id)
     {
-        $query = $this->findModelAll($id);
+        $query = new $this->modelClass;
 
-        return $query;
+        $model = $query::find()->where(['cid'=>$id])->orWhere(['type'=>1])->all();
 
+        return $model;
 
     }
 
@@ -78,17 +78,6 @@ class AppPushController extends ActiveController
         $modelClass = $this->modelClass;
 
             if (($model = $modelClass::findOne(['cid'=>$id])) !== null) {
-                return $model;
-            } else {
-                throw new NotFoundHttpException('The requested page does not exist.');
-            }
-
-    }
-    protected function findModelAll($id)
-    {
-        $modelClass = $this->modelClass;
-
-            if (($model = $modelClass::findAll(['cid'=>$id])) !== null) {
                 return $model;
             } else {
                 throw new NotFoundHttpException('The requested page does not exist.');
