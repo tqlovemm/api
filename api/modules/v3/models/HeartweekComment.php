@@ -7,7 +7,7 @@ use app\components\db\ActiveRecord;
 
 
 /**
- * This is the model class for table "pre_weekly_comment".
+ * This is the model class for table "pre_heartweek_comment".
  *
  * @property integer $id;
  * @property integer $weekly_id

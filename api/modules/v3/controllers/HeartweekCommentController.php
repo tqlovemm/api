@@ -31,12 +31,16 @@ class HeartweekCommentController extends ActiveController
         return $actions;
     }
 
+
     public function actionView($id)
     {
-        $query = $this->findModelAll($id);
+        $modelClass = $this->modelClass;
 
-        return $query;
+        $query = $modelClass::find()->where(['weekly_id'=>$id]);
 
+        return new ActiveDataProvider([
+            'query' => $query,
+        ]);
 
     }
     public function actionCreate()
@@ -89,16 +93,6 @@ class HeartweekCommentController extends ActiveController
             }
 
     }
-    protected function findModelAll($id)
-    {
-        $modelClass = $this->modelClass;
 
-            if (($model = $modelClass::findAll(['weekly_id'=>$id])) !== null) {
-                return $model;
-            } else {
-                throw new NotFoundHttpException('The requested page does not exist.');
-            }
-
-    }
 
 }
