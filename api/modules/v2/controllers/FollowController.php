@@ -36,7 +36,7 @@ class FollowController extends Controller
             if(!empty($cid['cid'])){
                 $title = "有人关注您为好友";
                 $msg = "有人关注您为好友";
-                $extras = json_encode(array('push_title'=>$title,'push_content'=>$msg,'push_type'=>'SSCOMM_FANS'));
+                $extras = json_encode(array('push_title'=>urlencode($title),'push_content'=>urlencode($msg),'push_type'=>'SSCOMM_FANS'));
                 Yii::$app->db->createCommand("insert into {{%app_push}} (status,cid,title,msg,extras,platform,response) values(2,'$cid[cid]','$title','$msg','$extras','all','NULL')")->execute();
 
             }

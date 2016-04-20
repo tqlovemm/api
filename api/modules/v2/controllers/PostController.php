@@ -79,7 +79,7 @@ class PostController extends ActiveController
 
                 $title = "有人评价了您的帖子";
                 $msg = "有人评价了您的帖子";
-                $extras = json_encode(array('push_title'=>$title,'push_content'=>$msg,'push_post_id'=>$model->thread_id,'push_type'=>'SSCOMM_NEWSCOMMENT_DETAIL'));
+                $extras = json_encode(array('push_title'=>urlencode($title),'push_content'=>urlencode($msg),'push_post_id'=>$model->thread_id,'push_type'=>'SSCOMM_NEWSCOMMENT_DETAIL'));
                 Yii::$app->db->createCommand("insert into {{%app_push}} (status,cid,title,msg,extras,platform,response) values(2,'$cid[cid]','$title','$msg','$extras','all','NULL')")->execute();
             }
 
