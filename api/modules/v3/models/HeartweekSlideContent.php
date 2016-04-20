@@ -59,12 +59,32 @@ class HeartweekSlideContent extends ActiveRecord
     // 返回的数据格式化
     public function fields()
     {
-        $fields = parent::fields();
-        $fields["heartweek_slide_content_id"] = $fields['id'];
-    //  remove fields that contain sensitive information
-        unset($fields['id']);
+ /*       $fields = parent::fields();
 
-        return $fields;
+        $fields["heartweek_slide_content_id"] = $fields['id'];
+        $fields["heartweek_content_id"] = $fields['album_id'];
+        $fields['name']=strip_tags($fields['name']);*/
+    //  remove fields that contain sensitive information
+      /*  unset($fields['id'],$fields['album_id']);
+
+        return $fields;*/
+
+
+        return [
+
+            'heartweek_slide_content_id'=>'id','heartweek_content_id'=>'album_id',
+            'name'=>function($model){
+
+                return strip_tags($model['name']);
+
+            } ,
+            'content'=>function($model){
+
+                return strip_tags($model['content']);
+
+            },'path','created_at'
+
+        ];
 
     }
 
