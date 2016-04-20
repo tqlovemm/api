@@ -53,6 +53,7 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
                       'v3/dating','v3/dating-content','v3/dating-comment','v3/date','v3/version','v3/push','v3/heartweek','v3/slide-content',
+                        'v3/heartweek-comment',
                     ],
                     'tokens' => [
                         '{id}' => '<id:\\w+>',
