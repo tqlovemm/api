@@ -6,10 +6,12 @@ use Yii;
 use yii\rest\ActiveController;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Response;
+use yii\data\ActiveDataProvider;
 
 class AppPushController extends ActiveController
 {
     public $modelClass = 'api\modules\v3\models\AppPush';
+    //分页
     public $serializer = [
         'class' => 'yii\rest\Serializer',
         'collectionEnvelope' => 'items',
@@ -30,16 +32,17 @@ class AppPushController extends ActiveController
         return $actions;
     }
 
-
-    public function actionView($id)
+    public function actionIndex()
     {
-        $query = new $this->modelClass;
 
-        $model = $query::find()->where(['cid'=>$id])->orWhere(['type'=>1])->all();
+        $modelClass = $this->modelClass;
+        $query = $modelClass::find()->where(['cid'=>$_GET['cid']])->orWhere(['type'=>1])->orderBy('created_at DESC');
 
-        return $model;
-
+        return new ActiveDataProvider([
+            'query' => $query,
+        ]);
     }
+
 
     public function actionUpdate($id){
 

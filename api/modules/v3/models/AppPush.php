@@ -6,6 +6,7 @@ use app\components\db\ActiveRecord;
 use Yii;
 
 
+
 /**
  * This is the model class for table "pre_app_push".
  *
@@ -28,6 +29,7 @@ class AppPush extends ActiveRecord
     {
         return '{{%app_push}}';
     }
+
 
     public function getId()
     {

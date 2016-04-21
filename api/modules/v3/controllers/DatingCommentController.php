@@ -37,7 +37,7 @@ class DatingCommentController extends ActiveController
 
         if(isset($_GET['dating_id'])){
 
-            $query = $modelClass::find()->where(['weekly_id'=>$_GET['dating_id']]);
+            $query = $modelClass::find()->where(['weekly_id'=>$_GET['dating_id']])->orderBy('created_at DESC');
 
         }else{
 
