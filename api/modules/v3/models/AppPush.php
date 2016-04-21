@@ -11,7 +11,11 @@ use Yii;
  *
  * @property integer $id
  * @property integer $status
+ * @property integer $read
+ * @property integer $created_at
+ * @property integer $updated_at
  * @property string $cid
+ * @property string $icon
  * @property string $title
  * @property string $msg
  * @property string $extras
@@ -35,9 +39,9 @@ class AppPush extends ActiveRecord
     {
         return [
 
-            [['cid','msg','extras','response','title','status'],'required'],
-            [['cid','msg','extras','response','title'], 'string'],
-            [['status'], 'integer'],
+            [['read'],'required'],
+            [['cid','msg','extras','response','title','icon'], 'string'],
+            [['status','created_at','updated_at','read'], 'integer'],
         ];
     }
     public function attributeLabels()
@@ -50,6 +54,10 @@ class AppPush extends ActiveRecord
             'response' => '响应',
             'cid' => 'app唯一标识',
             'status' => '状态',
+            'read' => '阅读',
+            'icon' => '图标',
+            'created_at' => '创建时间',
+            'updated_at' => '更新时间',
 
         ];
     }
@@ -65,7 +73,14 @@ class AppPush extends ActiveRecord
 
         return [
 
-            'push_id'=>'id','title','msg','extras','status','cid','response'
+            'push_id'=>'id','title','msg','status','cid','created_at','updated_at','read','icon','response',
+
+            'extras'=>function($model){
+
+
+                return json_decode(urldecode($model['extras']));
+
+            }
 
         ];
 
