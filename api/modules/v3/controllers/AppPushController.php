@@ -41,6 +41,20 @@ class AppPushController extends ActiveController
 
     }
 
+    public function actionUpdate($id){
+
+        $model = $this->findModels($id);
+
+        $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+
+        if (!$model->save()) {
+
+            return array_values($model->getFirstErrors())[0];
+        }
+
+        return $model;
+
+    }
     public function actionDelete($id)
     {
 
@@ -67,6 +81,17 @@ class AppPushController extends ActiveController
         $modelClass = $this->modelClass;
 
             if (($model = $modelClass::findOne(['id'=>$id,'cid'=>$cid])) !== null) {
+                return $model;
+            } else {
+                throw new NotFoundHttpException('The requested page does not exist.');
+            }
+
+    }
+    protected function findModels($id)
+    {
+        $modelClass = $this->modelClass;
+
+            if (($model = $modelClass::findOne($id)) !== null) {
                 return $model;
             } else {
                 throw new NotFoundHttpException('The requested page does not exist.');
