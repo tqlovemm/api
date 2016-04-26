@@ -82,7 +82,15 @@ class HeartweekSlideContent extends ActiveRecord
 
                 return strip_tags($model['content']);
 
-            },'path','created_at'
+            },
+            'path'=>function($model){
+                $imgInfo = getimagesize($model['path']);
+                $imgInfo['img_path'] = $model['path'];
+                return  $imgInfo;
+
+            }
+
+            ,'created_at'
 
         ];
 
