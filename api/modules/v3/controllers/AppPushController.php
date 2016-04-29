@@ -2,7 +2,6 @@
 
 namespace api\modules\v3\controllers;
 
-use api\modules\v3\models\AppPush;
 use Yii;
 use yii\rest\ActiveController;
 use yii\web\NotFoundHttpException;
