@@ -56,7 +56,8 @@ class FlopContentData extends ActiveRecord
 
             'content'=>function($model){
 
-                $content = explode(',',$model->content);
+                $content = array_filter(explode(',',$model->content));
+
 
                 $contents = array();
 
@@ -75,7 +76,9 @@ class FlopContentData extends ActiveRecord
 
             'priority'=>function($model){
 
-                $content = explode(',',$model->priority);
+                $content = array_filter(explode(',',$model->priority));
+
+
                 $contents = array();
 
                 foreach($content as $item){
