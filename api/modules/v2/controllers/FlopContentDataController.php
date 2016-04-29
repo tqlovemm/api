@@ -45,6 +45,7 @@ class FlopContentDataController extends ActiveController
 
             $query = $modelClass::find()->where(['user_id'=>$_GET['user_id']])->orderBy('created_at desc');
 
+
         }else{
 
             return false;

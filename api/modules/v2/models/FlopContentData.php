@@ -43,12 +43,56 @@ class FlopContentData extends ActiveRecord
 
     public function fields()
     {
-        $fields = parent::fields();
-        $fields["flop_content_data_id"] = $fields['id'];
+/*        $fields = parent::fields();
+        $fields["flop_content_data_id"] = $fields['id'];*/
         // remove fields that contain sensitive information
 
-        unset($fields['id']);
-        return $fields;
+  /*      unset($fields['id']);
+        return $fields;*/
+
+        return [
+
+            'flop_content_data_id'=>'id','user_id',
+
+            'content'=>function($model){
+
+                $content = explode(',',$model->content);
+
+                $contents = array();
+
+                foreach($content as $item){
+
+                    $photo = Yii::$app->db->createCommand("select id as flop_content_id,path from {{%flop_content}} WHERE id=$item")->queryOne();
+
+                    if(!empty($photo)){
+
+                        array_push($contents,$photo);
+                    }
+                }
+                return $contents;
+
+            },
+
+            'priority'=>function($model){
+
+                $content = explode(',',$model->priority);
+                $contents = array();
+
+                foreach($content as $item){
+
+                    $photo = Yii::$app->db->createCommand("select id as flop_content_id,path from {{%flop_content}} WHERE id=$item")->queryOne();
+
+                    if(!empty($photo)){
+
+                        array_push($contents,$photo);
+                    }
+                }
+                return $contents;
+
+            },
+            'created_at','updated_at','flag',
+
+        ];
 
     }
 
