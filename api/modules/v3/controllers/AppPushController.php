@@ -2,6 +2,7 @@
 
 namespace api\modules\v3\controllers;
 
+use api\modules\v3\models\AppPush;
 use Yii;
 use yii\rest\ActiveController;
 use yii\web\NotFoundHttpException;
@@ -41,6 +42,23 @@ class AppPushController extends ActiveController
         return new ActiveDataProvider([
             'query' => $query,
         ]);
+    }
+    public function actionView($id){
+
+        $query_all = Yii::$app->db->createCommand("select count(*) from {{%app_push}} where cid='$id'")->queryScalar();
+        $query_unread_all = Yii::$app->db->createCommand("select count(*) from {{%app_push}} where cid='$id'and is_read=1")->queryScalar();
+        $query_unread_group_1 = Yii::$app->db->createCommand("select type,count(type) as num from {{%app_push}} where cid='$id'and is_read=1 group by type")->queryAll();
+
+        $query_unread_group=array();
+
+        foreach($query_unread_group_1 as $item){$query_unread_group[$item['type']]=$item['num'];}
+
+        $query_unread_group['total']=$query_all;
+
+        $query_unread_group['unread_total']=$query_unread_all;
+
+        return $query_unread_group;
+
     }
 
 
