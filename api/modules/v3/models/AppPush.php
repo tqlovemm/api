@@ -12,7 +12,7 @@ use Yii;
  *
  * @property integer $id
  * @property integer $status
- * @property integer $read
+ * @property integer $is_read
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $cid
@@ -41,9 +41,9 @@ class AppPush extends ActiveRecord
     {
         return [
 
-            [['read'],'required'],
+            [['is_read'],'required'],
             [['cid','msg','extras','response','title','icon'], 'string'],
-            [['status','created_at','updated_at','read'], 'integer'],
+            [['status','created_at','updated_at','is_read'], 'integer'],
         ];
     }
     public function attributeLabels()
@@ -56,7 +56,7 @@ class AppPush extends ActiveRecord
             'response' => '响应',
             'cid' => 'app唯一标识',
             'status' => '状态',
-            'read' => '阅读',
+            'is_read' => '阅读',
             'icon' => '图标',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
@@ -75,7 +75,7 @@ class AppPush extends ActiveRecord
 
         return [
 
-            'push_id'=>'id','title','msg','status','cid','created_at','updated_at','read','icon','response',
+            'push_id'=>'id','title','msg','status','cid','created_at','updated_at','is_read','icon','response',
 
             'extras'=>function($model){
 
