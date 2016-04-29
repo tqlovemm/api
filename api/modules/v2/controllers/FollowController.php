@@ -39,7 +39,7 @@ class FollowController extends Controller
                 $date = time();
                 $icon = 'http://13loveme.com:82/images/app_push/u=3453872033,2552982116&fm=21&gp=0.png';
                 $extras = json_encode(array('push_title'=>urlencode($title),'push_content'=>urlencode($msg),'push_type'=>'SSCOMM_FANS'));
-                Yii::$app->db->createCommand("insert into {{%app_push}} (status,cid,title,msg,extras,platform,response,icon,created_at,updated_at) values(2,'$cid[cid]','$title','$msg','$extras','all','NULL','$icon',$date,$date)")->execute();
+                Yii::$app->db->createCommand("insert into {{%app_push}} (status,cid,title,msg,extras,platform,response,icon,created_at,updated_at) values('SSCOMM_FANS','$cid[cid]','$title','$msg','$extras','all','NULL','$icon',$date,$date)")->execute();
 
             }
 

@@ -82,7 +82,7 @@ class PostController extends ActiveController
                 $date = time();
                 $icon = 'http://13loveme.com:82/images/app_push/u=1630850300,1879297584&fm=21&gp=0.png';
                 $extras = json_encode(array('push_title'=>urlencode($title),'push_content'=>urlencode($msg),'push_post_id'=>$model->thread_id,'push_type'=>'SSCOMM_NEWSCOMMENT_DETAIL'));
-                Yii::$app->db->createCommand("insert into {{%app_push}} (status,cid,title,msg,extras,platform,response,icon,created_at,updated_at) values(2,'$cid[cid]','$title','$msg','$extras','all','NULL','$icon',$date,$date)")->execute();
+                Yii::$app->db->createCommand("insert into {{%app_push}} (status,cid,title,msg,extras,platform,response,icon,created_at,updated_at) values('SSCOMM_NEWSCOMMENT_DETAIL','$cid[cid]','$title','$msg','$extras','all','NULL','$icon',$date,$date)")->execute();
             }
 
         }
