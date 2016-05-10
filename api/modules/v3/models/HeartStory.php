@@ -79,17 +79,12 @@ class HeartStory extends ActiveRecord
 
         return [
 
-            'dating_id'=>'id','number','title','created_at','avatar','status',
-            'url'=>function($model){
+            'dating_id'=>'id','title'=>function($model){
 
-                return explode('，',$model['url']);
-
-            } ,
-            'content'=>function($model){
-
-                return explode('，',$model['content']);
-
+                $title = ($model['title']==1)?"女生反馈":"男生反馈";
+                return $title;
             }
+            ,'created_at','status', 'url', 'content'
 
         ];
 
