@@ -11,7 +11,6 @@ use Yii;
  * @property integer $id
  * @property string $content
  * @property string $user_id
- * @property integer $user_sex
  * @property string $post_count
  * @property string $note
  * @property string $read_count
@@ -36,7 +35,7 @@ class Thread extends ActiveRecord
     public function rules()
     {
         return [
-            [['content','image_path','user_id','user_sex'], 'required'],
+            [['content','image_path','user_id'], 'required'],
             [['created_at', 'updated_at','note','post_count','read_count','is_stick','user_id','user_sex'], 'integer'],
         ];
     }
@@ -72,7 +71,7 @@ class Thread extends ActiveRecord
 
         return [
 
-            'thread_id'=>'id','created_at','updated_at','user_id','user_sex','post_count','note','read_count','is_stick',
+            'thread_id'=>'id','created_at','updated_at','user_id','post_count','note','read_count','is_stick',
             'content'=>function($model){
 
                 $preg = "/<\/?[^>]+>/i";
@@ -99,7 +98,6 @@ class Thread extends ActiveRecord
             'note' => '点赞数',
             'read_count' => '阅读数',
             'user_id' => 'User ID',
-            'user_sex' => 'User Sex',
             'is_stick' => '置顶',
             'image_path' => '图片路径',
             'created_at' => 'Created At',

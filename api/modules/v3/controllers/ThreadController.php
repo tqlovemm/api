@@ -37,18 +37,21 @@ class ThreadController extends ActiveController
 
     public function actionIndex()
     {
+
         $modelClass = $this->modelClass;
+        $query = (new Query())->select("id")->from("{{%user}}")->where(['sex'=>1])->column();
+
         if(isset($_GET['max_id'])){
 
             $max_id = $_GET['max_id'];
 
             if(isset($_GET['user_sex'])&&isset($_GET['user_sex'])==1){
 
-                $latest = $modelClass::find()->where("id>{$max_id}")->andWhere(['user_sex'=>1])->orderBy('created_at desc');
+                $latest = $modelClass::find()->where("id>{$max_id}")->andWhere(['in','user_id',$query])->orderBy('created_at desc');
 
             }else{
 
-                $latest = $modelClass::find()->where("id>{$max_id}")->andWhere(['user_sex'=>0])->orderBy('created_at desc');
+                $latest = $modelClass::find()->where("id>{$max_id}")->andWhere(['not in','user_id',$query])->orderBy('created_at desc');
 
             }
 
@@ -62,11 +65,11 @@ class ThreadController extends ActiveController
 
             if(isset($_GET['user_sex'])&&isset($_GET['user_sex'])==1){
 
-                $before = $modelClass::find()->where("id<{$min_id}")->andWhere(['user_sex'=>1])->orderBy('created_at desc');
+                $before = $modelClass::find()->where("id<{$min_id}")->andWhere(['in','user_id',$query])->orderBy('created_at desc');
 
             }else{
 
-                $before = $modelClass::find()->where("id<{$min_id}")->andWhere(['user_sex'=>0])->orderBy('created_at desc');
+                $before = $modelClass::find()->where("id<{$min_id}")->andWhere(['not in','user_id',$query])->orderBy('created_at desc');
             }
 
 
@@ -78,9 +81,14 @@ class ThreadController extends ActiveController
         }
 
 
-        $query = $modelClass::find()->orderBy('created_at desc');
+        if(isset($_GET['user_sex'])&&isset($_GET['user_sex'])==1){
 
+            $query = $modelClass::find()->where(['in','user_id',$query])->orderBy('created_at desc');
 
+        }else{
+
+            $query = $modelClass::find()->where(['not in','user_id',$query])->orderBy('created_at desc');
+        }
         return new ActiveDataProvider([
             'query' => $query,
         ]);
