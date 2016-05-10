@@ -49,7 +49,7 @@ class ThreadController extends ActiveController
 
                 $latest = $modelClass::find()->where("id>{$max_id}")->andWhere(['in','user_id',$query])->orderBy('created_at desc');
 
-            }else{
+            }elseif(isset($_GET['user_sex'])&&isset($_GET['user_sex'])==0){
 
                 $latest = $modelClass::find()->where("id>{$max_id}")->andWhere(['not in','user_id',$query])->orderBy('created_at desc');
 
@@ -67,11 +67,10 @@ class ThreadController extends ActiveController
 
                 $before = $modelClass::find()->where("id<{$min_id}")->andWhere(['in','user_id',$query])->orderBy('created_at desc');
 
-            }else{
+            }elseif(isset($_GET['user_sex'])&&isset($_GET['user_sex'])==0){
 
                 $before = $modelClass::find()->where("id<{$min_id}")->andWhere(['not in','user_id',$query])->orderBy('created_at desc');
             }
-
 
 
             return new ActiveDataProvider([
@@ -85,7 +84,7 @@ class ThreadController extends ActiveController
 
             $query = $modelClass::find()->where(['in','user_id',$query])->orderBy('created_at desc');
 
-        }else{
+        }elseif(isset($_GET['user_sex'])&&isset($_GET['user_sex'])==0){
 
             $query = $modelClass::find()->where(['not in','user_id',$query])->orderBy('created_at desc');
         }
