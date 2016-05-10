@@ -60,7 +60,16 @@ class ThreadController extends ActiveController
 
             $min_id = $_GET['min_id'];
 
-            $before = $modelClass::find()->where("id<{$min_id}")->orderBy('created_at desc');
+            if(isset($_GET['user_sex'])&&isset($_GET['user_sex'])==1){
+
+                $before = $modelClass::find()->where("id<{$min_id}")->andWhere(['user_sex'=>1])->orderBy('created_at desc');
+
+            }else{
+
+                $before = $modelClass::find()->where("id<{$min_id}")->andWhere(['user_sex'=>0])->orderBy('created_at desc');
+            }
+
+
 
             return new ActiveDataProvider([
                 'query' => $before,
