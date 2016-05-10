@@ -39,19 +39,23 @@ class ThreadController extends ActiveController
     {
 
         $modelClass = $this->modelClass;
-        $query = (new Query())->select("id")->from("{{%user}}")->where(['sex'=>1])->column();
+        $sex = (new Query())->select("id")->from("{{%user}}")->where(['sex'=>1])->column();
 
         if(isset($_GET['max_id'])){
 
             $max_id = $_GET['max_id'];
 
-            if(isset($_GET['user_sex'])&&isset($_GET['user_sex'])==1){
+            if(isset($_GET['user_sex'])&&$_GET['user_sex']==1){
 
-                $latest = $modelClass::find()->where("id>{$max_id}")->andWhere(['in','user_id',$query])->orderBy('created_at desc');
+                $latest = $modelClass::find()->where("id>{$max_id}")->andWhere(['in','user_id',$sex])->orderBy('created_at desc');
 
-            }elseif(isset($_GET['user_sex'])&&isset($_GET['user_sex'])==0){
+            }elseif(isset($_GET['user_sex'])&&$_GET['user_sex']==0){
 
-                $latest = $modelClass::find()->where("id>{$max_id}")->andWhere(['not in','user_id',$query])->orderBy('created_at desc');
+                $latest = $modelClass::find()->where("id>{$max_id}")->andWhere(['not in','user_id',$sex])->orderBy('created_at desc');
+
+            }else{
+
+                $latest = $modelClass::find()->where("id>{$max_id}")->orderBy('created_at desc');
 
             }
 
@@ -63,15 +67,19 @@ class ThreadController extends ActiveController
 
             $min_id = $_GET['min_id'];
 
-            if(isset($_GET['user_sex'])&&isset($_GET['user_sex'])==1){
+            if(isset($_GET['user_sex'])&&$_GET['user_sex']==1){
 
-                $before = $modelClass::find()->where("id<{$min_id}")->andWhere(['in','user_id',$query])->orderBy('created_at desc');
+                $before = $modelClass::find()->where("id<{$min_id}")->andWhere(['in','user_id',$sex])->orderBy('created_at desc');
 
-            }elseif(isset($_GET['user_sex'])&&isset($_GET['user_sex'])==0){
+            }elseif(isset($_GET['user_sex'])&&$_GET['user_sex']==0){
 
-                $before = $modelClass::find()->where("id<{$min_id}")->andWhere(['not in','user_id',$query])->orderBy('created_at desc');
+                $before = $modelClass::find()->where("id<{$min_id}")->andWhere(['not in','user_id',$sex])->orderBy('created_at desc');
+
+            }else{
+
+                $before = $modelClass::find()->where("id<{$min_id}")->orderBy('created_at desc');
+
             }
-
 
             return new ActiveDataProvider([
                 'query' => $before,
@@ -80,14 +88,19 @@ class ThreadController extends ActiveController
         }
 
 
-        if(isset($_GET['user_sex'])&&isset($_GET['user_sex'])==1){
+        if(isset($_GET['user_sex'])&&$_GET['user_sex']==1){
 
-            $query = $modelClass::find()->where(['in','user_id',$query])->orderBy('created_at desc');
+            $query = $modelClass::find()->where(['in','user_id',$sex])->orderBy('created_at desc');
 
-        }elseif(isset($_GET['user_sex'])&&isset($_GET['user_sex'])==0){
+        }elseif(isset($_GET['user_sex'])&&$_GET['user_sex']==0){
 
-            $query = $modelClass::find()->where(['not in','user_id',$query])->orderBy('created_at desc');
+            $query = $modelClass::find()->where(['not in','user_id',$sex])->orderBy('created_at desc');
+
+        }else{
+
+            $query = $modelClass::find()->orderBy('created_at desc');
         }
+
         return new ActiveDataProvider([
             'query' => $query,
         ]);
