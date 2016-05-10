@@ -37,7 +37,7 @@ class Thread extends ActiveRecord
     {
         return [
             [['content','image_path','user_id','user_sex'], 'required'],
-            [['created_at', 'updated_at','note','post_count','read_count','is_stick','user_id'], 'integer'],
+            [['created_at', 'updated_at','note','post_count','read_count','is_stick','user_id','user_sex'], 'integer'],
         ];
     }
     public function getUser(){
