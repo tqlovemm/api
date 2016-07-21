@@ -57,7 +57,7 @@ class FlopContent extends ActiveRecord
             'flop_id','like_count','nope_count','weight','height',
             'area','number','content'=>function($model){
 
-                return iconv('GB2312', 'UTF-8', $model['content']);
+                return $model['content'];
 
             }, 'path'
 
