@@ -62,7 +62,14 @@ class FlopContent extends ActiveRecord
                 $data = implode('/',$array);
                 return $data;
 
-            }, 'path'
+            }, 'path'=>function($model){
+
+                $array = explode('/',$model['path']);
+                $array[count($array)-1] = urlencode($array[count($array)-1]);
+                $data = implode('/',$array);
+                return $data;
+
+            }
 
         ];
 
