@@ -55,7 +55,11 @@ class FlopContent extends ActiveRecord
 
             'flop_content_id'=>'id','created_at','updated_at',
             'flop_id','like_count','nope_count','weight','height',
-            'area','number','content', 'path'
+            'area','number','content'=>function($model){
+
+                return urlencode($model['content']);
+
+            }, 'path'
 
         ];
 
